@@ -29,15 +29,21 @@ function mostrarIMCnoTD(paciente) {
     }
 }
 
-function criarNovaTR() {
-    //é possível acessar os input's dentro do form, através do nome. -> form.nameDoInput
-    var { nome, peso, altura, gordura } = capturarValoresDoForm();
+function adicionarPacienteNaTabelaDeListagem(paciente) {
+    var tr = criarTRparaPaciente(paciente);
+    adicionarTRnaTabela(tr);
+}
+
+function criarTRparaPaciente(paciente) {
     var pacienteTR = document.createElement("tr");
-    adicionarValorNaTR(nome, pacienteTR);
-    adicionarValorNaTR(peso, pacienteTR);
-    adicionarValorNaTR(altura, pacienteTR);
-    adicionarValorNaTR(gordura, pacienteTR);
-    adicionarValorNaTR(calcularIMC(peso, altura), pacienteTR);
+    pacienteTR.classList.add("paciente");
+    
+    adicionarValorNaTR(paciente.nome, pacienteTR, "info-nome");
+    adicionarValorNaTR(paciente.peso, pacienteTR, "info-peso");
+    adicionarValorNaTR(paciente.altura, pacienteTR, "info-altura");
+    adicionarValorNaTR(paciente.gordura, pacienteTR, "info-gordura");
+    adicionarValorNaTR(paciente.imc, pacienteTR, "info-imc");
+
     return pacienteTR;
 }
 
@@ -46,9 +52,10 @@ function adicionarTRnaTabela(tr) {
         .appendChild(tr);
 }
 
-function adicionarValorNaTR(valor, tr) {
+function adicionarValorNaTR(valor, tr, nomeClasse) {
     //Cria o elemento td
     var td = document.createElement("td");
+    td.classList.add(nomeClasse);
     //adiciona o valor dentro da td
     td.textContent = valor;
     //adiciona o 
@@ -57,7 +64,7 @@ function adicionarValorNaTR(valor, tr) {
 
 function calcularIMC(peso, altura) {
     var imc = peso / (altura * altura);
-    
+
     //toFixed é usado para definir a quantidade de casas decimais
     return imc.toFixed(2);
 }

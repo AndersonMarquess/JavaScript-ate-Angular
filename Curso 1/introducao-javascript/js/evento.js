@@ -14,10 +14,12 @@ btnAdicionar.addEventListener("click", (event) => {
     //para impedir o comportamento padrão de reload da página, usamos o preventDefault()
     event.preventDefault();
     adicionarPacienteNaTabela();
-    console.log("Paciente adicionado.");
+    
+    //limpar campos do form
+    form.reset();
 });
 
 function adicionarPacienteNaTabela() {
-    var pacienteTR = criarNovaTR();
-    adicionarTRnaTabela(pacienteTR);
+    var paciente = criarPacienteComValoresDoForm();
+    adicionarPacienteNaTabelaDeListagem(paciente);
 }
