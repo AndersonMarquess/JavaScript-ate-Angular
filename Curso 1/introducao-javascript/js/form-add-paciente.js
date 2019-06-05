@@ -1,8 +1,15 @@
 var form = document.querySelector("#form-add-paciente");
-function capturarValoresDoForm() {
-    var nome = form.nome.value;
-    var peso = form.peso.value;
-    var altura = form.altura.value;
-    var gordura = form.gordura.value;
-    return { nome, peso, altura, gordura };
+function criarPacienteComValoresDoForm() {
+    //Objeto
+    var paciente = {
+        //é possível acessar os input's dentro do form, através do nome. -> form.nameDoInput
+        // para objetos é usado : na atribuição de valor
+        nome: form.nome.value,
+        peso: form.peso.value,
+        altura: form.altura.value,
+        gordura: form.gordura.value,
+        imc: calcularIMC(form.peso.value, form.altura.value)
+    }
+
+    return paciente;
 }
