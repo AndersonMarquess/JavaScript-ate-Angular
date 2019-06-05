@@ -30,14 +30,31 @@ function mostrarIMCnoTD(paciente) {
 }
 
 function adicionarPacienteNaTabelaDeListagem(paciente) {
-    var tr = criarTRparaPaciente(paciente);
-    adicionarTRnaTabela(tr);
+    if (isPacienteValido(paciente)) {
+        var tr = criarTRparaPaciente(paciente);
+        adicionarTRnaTabela(tr);
+        limparForm();
+    }
+}
+
+function limparForm() {
+    //limpar campos do form
+    form.reset();
+}
+
+function isPacienteValido(paciente) {
+    var isAlturaInvalida = paciente.altura <= 0 || paciente.altura >= 3;
+    if (paciente == null || paciente.peso <= 0 || isAlturaInvalida) {
+        window.alert("Paciente inválido, verifique os valores e tente novamente.");
+        return false;
+    }
+    return true;
 }
 
 function criarTRparaPaciente(paciente) {
     var pacienteTR = document.createElement("tr");
     pacienteTR.classList.add("paciente");
-    
+
     adicionarValorNaTR(paciente.nome, pacienteTR, "info-nome");
     adicionarValorNaTR(paciente.peso, pacienteTR, "info-peso");
     adicionarValorNaTR(paciente.altura, pacienteTR, "info-altura");
