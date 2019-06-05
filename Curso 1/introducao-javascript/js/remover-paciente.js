@@ -10,5 +10,10 @@ tabelaPaciente.addEventListener("dblclick", (event) => {
 });
 
 function removerPaciente(paciente) {
-    paciente.remove();
+    paciente.classList.add("fadeOut");
+
+    //funciona parecido com o thread.sleep(300)
+    setTimeout(() => {
+        paciente.remove();
+    }, 300);
 }
