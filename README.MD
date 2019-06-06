@@ -4,3 +4,4 @@ Objetivando aprender angular, resolvi documentar este processo, salvando os cód
 
 ## Cursos: 
 1. JavaScript: Programando na linguagem da web - Alura.
+2. JavaScript avançado I: ES6, orientação a objetos e padrões de projetos - Alura.
