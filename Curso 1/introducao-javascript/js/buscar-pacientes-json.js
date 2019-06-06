@@ -12,7 +12,11 @@ function buscarPacientesDaAPI() {
 
     // load -> quando o carregamento das informações acabar, ele invoca a lambda.
     xhr.addEventListener("load", () => {
-        atualizarTabelaComDadosDaAPI(xhr.responseText);
+        if (xhr.status == 200) {
+            atualizarTabelaComDadosDaAPI(xhr.responseText);
+        } else {
+            console.log(`Erro ${xhr.status} - ${xhr.responseText}`);
+        }
     });
 }
 
@@ -22,4 +26,3 @@ function atualizarTabelaComDadosDaAPI(jsonRecebido) {
         adicionarPacienteNaTabelaDeListagem(paciente);
     });
 }
-
