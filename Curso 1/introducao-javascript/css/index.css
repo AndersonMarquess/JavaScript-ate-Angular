@@ -138,3 +138,12 @@ button[disabled=disabled], button:disabled {
 	opacity: 0;
 	transition: 0.5s;
 }
+
+#filtro-tabela {
+	height: 3em;
+	margin-bottom: 1em;
+}
+
+.ocultar{
+	display: none;
+}
