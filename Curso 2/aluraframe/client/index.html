@@ -61,7 +61,16 @@
         </tfoot>
     </table>
 
-    <script src="js/index.js"></script>
+    <script src="js/models/Negociacao.js"></script>
+    <script>
+        var negoci1 = new Negociacao(new Date(), 2, 12);
+        console.log(negoci1);
+        
+        negoci1._data = new Date("2019-06-30");
+        negoci1._data.setDate(30);
+
+        console.log(negoci1);
+    </script>
 </body>
 
 </html>
