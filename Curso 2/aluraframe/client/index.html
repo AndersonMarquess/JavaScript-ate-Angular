@@ -13,7 +13,8 @@
 
     <h1 class="text-center">Negociações</h1>
 
-    <form class="form">
+    <!-- Como criamos a instância nogociacaoCtrl, podemos associar se método de adicionar ao form. -->
+    <form class="form" onsubmit="nogociacaoCtrl.adicionar(event)">
 
         <div class="form-group">
             <label for="data">Data</label>
@@ -62,9 +63,11 @@
     </table>
 
     <script src="js/models/Negociacao.js"></script>
+    <script src="js/controllers/NegociacaoController.js"></script>
     <script>
-        var negoci1 = new Negociacao(new Date(), 2, 12);
-        console.log(negoci1);
+        //var = escopo global
+        //let = escopo de bloco
+        let nogociacaoCtrl = new NegociacaoController();
     </script>
 </body>
 
