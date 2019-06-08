@@ -13,8 +13,8 @@
 
     <h1 class="text-center">Negociações</h1>
 
-    <!-- Como criamos a instância nogociacaoCtrl, podemos associar se método de adicionar ao form. -->
-    <form class="form" onsubmit="nogociacaoCtrl.adicionar(event)">
+    <!-- Como criamos a instância negociacaoCtrl, podemos associar se método de adicionar ao form. -->
+    <form class="form" onsubmit="negociacaoCtrl.adicionar(event)">
 
         <div class="form-group">
             <label for="data">Data</label>
@@ -65,10 +65,14 @@
     <script src="js/models/Negociacao.js"></script>
     <script src="js/controllers/NegociacaoController.js"></script>
     <script src="js/exercicio-filtro.js"></script>
+    <script src="js/helpers/DataHelper.js"></script>
     <script>
         //var = escopo global
         //let = escopo de bloco
-        let nogociacaoCtrl = new NegociacaoController();
+        let negociacaoCtrl = new NegociacaoController();
+        console.log(DataHelper.textoParaData("2019-06-30"));
+        console.log(DataHelper.textoParaData("2019/06/30"));
+        
     </script>
 </body>
 
