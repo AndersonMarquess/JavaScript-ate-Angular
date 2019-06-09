@@ -22,7 +22,7 @@ class Negociacao {
      * variável.volume é a mesma coisa que variável.getVolume()
      */
     get volume() {
-        return (this._quantidade * this._valor).toFixed(2);
+        return parseFloat((this._quantidade * this._valor).toFixed(2));
     }
 
     get data() {

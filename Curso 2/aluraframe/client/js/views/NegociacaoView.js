@@ -2,19 +2,20 @@ class NegociacaoView {
 
     constructor(elemento) {
         this._elemento = elemento;
+        this._listaDeNegociacoes;
     }
 
     update(listaDeNegociacoes) {
-        let templateAtualiado = this._template(this._montarCorpoTabala(listaDeNegociacoes));
-        this._elemento.innerHTML = templateAtualiado;
+        this._listaDeNegociacoes = listaDeNegociacoes;
+        this._elemento.innerHTML = this._template();
     }
 
     /**
      * O .map() vai devolver outro Array, então usamos o .join() para transformar todo o array em uma string.
      */
-    _montarCorpoTabala(listaDeNegociacoes) {
+    _montarCorpoTabala() {
         return `${
-            listaDeNegociacoes.negociacoes.map(element =>
+            this._listaDeNegociacoes.negociacoes.map(element =>
                 this._criarTrComElemento(element)
             ).join('')
         }`;
@@ -29,7 +30,13 @@ class NegociacaoView {
                 </tr>`;
     }
 
-    _template(corpo) {
+    _calcularVolumeTotal() {
+        // Reduce processa um array e retorna um único resultado.
+        // valorInicial vai acumular a soma do volume de cada negociação, esta variável é iniciada com valor 0.0
+        return this._listaDeNegociacoes.negociacoes.reduce((valorInicial, negoc) => valorInicial + negoc.volume, 0.0);
+    }
+
+    _template() {
         return `<table class="table table-hover table-bordered">
                     <thead>
                         <tr>
@@ -40,10 +47,13 @@ class NegociacaoView {
                         </tr>
                     </thead>
 
-                    <tbody id="tbody-negociacao">
-                        ${corpo}
+                    <tbody>
+                        ${this._montarCorpoTabala()}
                     </tbody>
+
                     <tfoot>
+                        <td colspan="3"></td>
+                        <td>${this._calcularVolumeTotal()}</td>
                     </tfoot>
                 </table>`;
     }
