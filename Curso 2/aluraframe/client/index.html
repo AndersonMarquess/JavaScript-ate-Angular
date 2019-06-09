@@ -45,34 +45,18 @@
     <br>
     <br>
 
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>DATA</th>
-                <th>QUANTIDADE</th>
-                <th>VALOR</th>
-                <th>VOLUME</th>
-            </tr>
-        </thead>
-
-        <tbody id="tbody-negociacao">
-        </tbody>
-
-        <tfoot>
-        </tfoot>
-    </table>
+    <div id="negociacaoView"></div>
 
     <script src="js/models/Negociacao.js"></script>
     <script src="js/controllers/NegociacaoController.js"></script>
     <script src="js/exercicio-filtro.js"></script>
     <script src="js/helpers/DataHelper.js"></script>
+    <script src="js/models/ListaNegociacao.js"></script>
+    <script src="js/views/NegociacaoView.js"></script>
     <script>
         //var = escopo global
         //let = escopo de bloco
         let negociacaoCtrl = new NegociacaoController();
-        console.log(DataHelper.textoParaData("2019-06-30"));
-        console.log(DataHelper.textoParaData("2019/06/30"));
-        
     </script>
 </body>
 
