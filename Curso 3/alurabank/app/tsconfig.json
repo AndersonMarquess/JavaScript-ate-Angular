@@ -3,7 +3,9 @@
         // Após compilado ele ira transformar em EcmaScript 6.
         "target": "es6",
         // Pasta alvo para colocar o conteúdo transformado em JavaScript.
-        "outDir": "app-pos-compilar/js"
+        "outDir": "pos-compilar/js",
+        //Impedi a transformação em javascript caso exista erro de compilação.
+        "noEmitOnError": true
     },
     "include": [
         // Origem dos códigos que serão transformados em JavaScript.
