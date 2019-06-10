@@ -11,6 +11,10 @@ class NegociacaoController {
 
         this._negociacaoView = new NegociacaoView(this.buscarValor("#negociacaoView"));
         this._negociacaoView.update(this._listaNegociacoes);
+
+        this._mensagemView = new MensagemView(this.buscarValor("#alertas"));
+        this._mensagem = new Mensagem();
+        this._mensagemView.update(this._mensagem);
     }
 
     /**
@@ -23,6 +27,8 @@ class NegociacaoController {
         let negociacao = this._criarNegociacao();
         this._listaNegociacoes.adicionar(negociacao);
 
+        this._mensagem.text = "Negociação adicionada com sucesso.";
+        this._mensagemView.update(this._mensagem);
         this._negociacaoView.update(this._listaNegociacoes);
         this._limparFormulario();
     }

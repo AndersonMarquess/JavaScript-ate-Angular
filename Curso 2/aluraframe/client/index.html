@@ -13,6 +13,8 @@
 
     <h1 class="text-center">Negociações</h1>
 
+    <div id="alertas"></div>
+
     <!-- Como criamos a instância negociacaoCtrl, podemos associar se método de adicionar ao form. -->
     <form class="form" onsubmit="negociacaoCtrl.adicionar(event)">
 
@@ -52,7 +54,12 @@
     <script src="js/exercicio-filtro.js"></script>
     <script src="js/helpers/DataHelper.js"></script>
     <script src="js/models/ListaNegociacao.js"></script>
+    <script src="js/models/Mensagem.js"></script>
+    
+    <!-- A super classe deve ser importada antes de suas filhas. -->
+    <script src="js/views/View.js"></script>
     <script src="js/views/NegociacaoView.js"></script>
+    <script src="js/views/MensagemView.js"></script>
     <script>
         //var = escopo global
         //let = escopo de bloco
