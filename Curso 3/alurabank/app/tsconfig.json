@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        // Após compilado ele ira transformar em EcmaScript 6.
+        "target": "es6",
+        // Pasta alvo para colocar o conteúdo transformado em JavaScript.
+        "outDir": "app-pos-compilar/js"
+    },
+    "include": [
+        // Origem dos códigos que serão transformados em JavaScript.
+        "ts/**/*"
+    ]
+}
