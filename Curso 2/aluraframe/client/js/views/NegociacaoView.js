@@ -1,13 +1,7 @@
-class NegociacaoView {
+class NegociacaoView extends View {
 
-    constructor(elemento) {
-        this._elemento = elemento;
-        this._listaDeNegociacoes;
-    }
-
-    update(listaDeNegociacoes) {
-        this._listaDeNegociacoes = listaDeNegociacoes;
-        this._elemento.innerHTML = this._template();
+    constructor(element) {
+        super(element);
     }
 
     /**
@@ -15,7 +9,7 @@ class NegociacaoView {
      */
     _montarCorpoTabala() {
         return `${
-            this._listaDeNegociacoes.negociacoes.map(element =>
+            super.dados.negociacoes.map(element =>
                 this._criarTrComElemento(element)
             ).join('')
         }`;
@@ -33,10 +27,10 @@ class NegociacaoView {
     _calcularVolumeTotal() {
         // Reduce processa um array e retorna um único resultado.
         // valorInicial vai acumular a soma do volume de cada negociação, esta variável é iniciada com valor 0.0
-        return this._listaDeNegociacoes.negociacoes.reduce((valorInicial, negoc) => valorInicial + negoc.volume, 0.0);
+        return super.dados.negociacoes.reduce((valorInicial, negoc) => valorInicial + negoc.volume, 0.0);
     }
 
-    _template() {
+    template() {
         return `<table class="table table-hover table-bordered">
                     <thead>
                         <tr>
