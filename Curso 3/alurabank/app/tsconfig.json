@@ -5,7 +5,9 @@
         // Pasta alvo para colocar o conteúdo transformado em JavaScript.
         "outDir": "pos-compilar/js",
         //Impedi a transformação em javascript caso exista erro de compilação.
-        "noEmitOnError": true
+        "noEmitOnError": true,
+        //Não vai definir as variáveis como any
+        "noImplicitAny": true
     },
     "include": [
         // Origem dos códigos que serão transformados em JavaScript.
