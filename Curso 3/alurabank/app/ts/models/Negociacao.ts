@@ -6,7 +6,7 @@ class Negociacao {
     constructor(private _data: Date, private _quantidade: number, private _valor: number) { }
 
     public get data(): Date {
-        return this._data;
+        return new Date(this._data.getTime());
     }
 
     public get quantidade(): number {
@@ -15,5 +15,9 @@ class Negociacao {
 
     public get valor(): number {
         return this._valor;
+    }
+
+    public toString(): string {
+        return `Data: ${this.data.toLocaleDateString()}\nQuantidade: ${this._quantidade}\nValor: ${this.valor}`
     }
 }
