@@ -10,6 +10,8 @@ class NegociacaoController {
     private _negociacoes: ListaNegociacao = new ListaNegociacao();
     private _negociacaoView = new NegociacaoView(this.getElementoComSeletor("#tabela-negociacoes"));
 
+    private _mensagemView = new MensagemView(this.getElementoComSeletor("#mensagemView"));
+
     constructor() {
         this._data = <HTMLInputElement>this.getElementoComSeletor("#data");
         this._quantidade = <HTMLInputElement>this.getElementoComSeletor("#quantidade");
@@ -25,7 +27,7 @@ class NegociacaoController {
 
         const negociacao = new Negociacao(
             //Corrige o problema de replace da data no firefox.
-            new Date(this._data.value.replace(/-/g,",")),
+            new Date(this._data.value.replace(/-/g, ",")),
             parseInt(this._quantidade.value),
             parseFloat(this._valor.value)
         );
@@ -33,6 +35,7 @@ class NegociacaoController {
         this._negociacoes.adicionar(negociacao);
         this._negociacoes.negociacoes.forEach(n => console.log(n.toString()));
         this._negociacaoView.update(this._negociacoes);
+        this._mensagemView.update("Negociação adicionada com sucesso.");
     }
 
     private getElementoComSeletor(seletor: string): Element {

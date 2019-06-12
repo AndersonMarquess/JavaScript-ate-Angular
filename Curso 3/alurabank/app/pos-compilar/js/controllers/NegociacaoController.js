@@ -3,6 +3,7 @@ class NegociacaoController {
         //é o mesmo que _negociacoes = new ListaNegociacao() inferência de tipo.
         this._negociacoes = new ListaNegociacao();
         this._negociacaoView = new NegociacaoView(this.getElementoComSeletor("#tabela-negociacoes"));
+        this._mensagemView = new MensagemView(this.getElementoComSeletor("#mensagemView"));
         this._data = this.getElementoComSeletor("#data");
         this._quantidade = this.getElementoComSeletor("#quantidade");
         // <HTMLInputElement> é um cast.
@@ -18,6 +19,7 @@ class NegociacaoController {
         this._negociacoes.adicionar(negociacao);
         this._negociacoes.negociacoes.forEach(n => console.log(n.toString()));
         this._negociacaoView.update(this._negociacoes);
+        this._mensagemView.update("Negociação adicionada com sucesso.");
     }
     getElementoComSeletor(seletor) {
         return document.querySelector(seletor);
