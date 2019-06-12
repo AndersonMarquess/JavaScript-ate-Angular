@@ -8,12 +8,14 @@ class NegociacaoController {
     private _valor: HTMLInputElement;
     //é o mesmo que _negociacoes = new ListaNegociacao() inferência de tipo.
     private _negociacoes: ListaNegociacao = new ListaNegociacao();
+    private _negociacaoView = new NegociacaoView(this.getElementoComSeletor("#tabela-negociacoes"));
 
     constructor() {
         this._data = <HTMLInputElement>this.getElementoComSeletor("#data");
         this._quantidade = <HTMLInputElement>this.getElementoComSeletor("#quantidade");
         // <HTMLInputElement> é um cast.
         this._valor = <HTMLInputElement>this.getElementoComSeletor("#valor");
+        this._negociacaoView.update(this._negociacoes);
     }
 
     public adicionar(event: Event): void {
@@ -30,6 +32,7 @@ class NegociacaoController {
 
         this._negociacoes.adicionar(negociacao);
         this._negociacoes.negociacoes.forEach(n => console.log(n.toString()));
+        this._negociacaoView.update(this._negociacoes);
     }
 
     private getElementoComSeletor(seletor: string): Element {
