@@ -20,4 +20,7 @@ class Negociacao {
     toString() {
         return `Data: ${this.data.toLocaleDateString()}\nQuantidade: ${this._quantidade}\nValor: ${this.valor}`;
     }
+    get volume() {
+        return this._quantidade * this._valor;
+    }
 }
