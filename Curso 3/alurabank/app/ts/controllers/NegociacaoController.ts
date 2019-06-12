@@ -8,9 +8,9 @@ class NegociacaoController {
     private _valor: HTMLInputElement;
     //é o mesmo que _negociacoes = new ListaNegociacao() inferência de tipo.
     private _negociacoes: ListaNegociacao = new ListaNegociacao();
-    private _negociacaoView = new NegociacaoView(this.getElementoComSeletor("#tabela-negociacoes"));
+    private _negociacaoView = new Views.NegociacaoView(this.getElementoComSeletor("#tabela-negociacoes"));
 
-    private _mensagemView = new MensagemView(this.getElementoComSeletor("#mensagemView"));
+    private _mensagemView = new Views.MensagemView(this.getElementoComSeletor("#mensagemView"));
 
     constructor() {
         this._data = <HTMLInputElement>this.getElementoComSeletor("#data");

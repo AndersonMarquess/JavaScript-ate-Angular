@@ -1,8 +1,8 @@
 class NegociacaoController {
     constructor() {
         this._negociacoes = new ListaNegociacao();
-        this._negociacaoView = new NegociacaoView(this.getElementoComSeletor("#tabela-negociacoes"));
-        this._mensagemView = new MensagemView(this.getElementoComSeletor("#mensagemView"));
+        this._negociacaoView = new Views.NegociacaoView(this.getElementoComSeletor("#tabela-negociacoes"));
+        this._mensagemView = new Views.MensagemView(this.getElementoComSeletor("#mensagemView"));
         this._data = this.getElementoComSeletor("#data");
         this._quantidade = this.getElementoComSeletor("#quantidade");
         this._valor = this.getElementoComSeletor("#valor");
