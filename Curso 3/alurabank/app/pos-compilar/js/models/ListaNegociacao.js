@@ -1,6 +1,5 @@
 class ListaNegociacao {
     constructor() {
-        // Array<Negociacao> é o mesmo que Negociacao[]
         this._negociacoes = [];
     }
     adicionar(negociacao) {

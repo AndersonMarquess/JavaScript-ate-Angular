@@ -7,7 +7,9 @@
         //Impedi a transformação em javascript caso exista erro de compilação.
         "noEmitOnError": true,
         //Não vai definir as variáveis como any
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        //Remove os comentários dos arquivos javascript finais.
+        "removeComments": true
     },
     "include": [
         // Origem dos códigos que serão transformados em JavaScript.
