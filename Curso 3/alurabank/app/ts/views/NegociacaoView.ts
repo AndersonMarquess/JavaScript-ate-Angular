@@ -1,4 +1,4 @@
-class NegociacaoView extends View {
+class NegociacaoView extends View<ListaNegociacao> {
 
     protected template(): string {
         return `<table class="table table-hover table-bordered">
@@ -23,8 +23,7 @@ class NegociacaoView extends View {
     }
 
     private montarTrsComNegociacoes(): string {
-        let _negociacoes = <ListaNegociacao>this.dados;
-        return _negociacoes.negociacoes.map(n =>
+        return this.dados.negociacoes.map(n =>
             `<tr>
                 <td>${n.data.toLocaleDateString()}</td>
                 <td>${n.quantidade}</td>
@@ -35,7 +34,6 @@ class NegociacaoView extends View {
     }
 
     private calcularVolumeTotal(): number {
-        let _negociacoes = <ListaNegociacao>this.dados;
-        return _negociacoes.negociacoes.reduce((sigma, negociacao) => sigma + negociacao.volume, 0);
+        return this.dados.negociacoes.reduce((sigma, negociacao) => sigma + negociacao.volume, 0);
     }
 }

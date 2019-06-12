@@ -21,8 +21,7 @@ class NegociacaoView extends View {
         </table>`;
     }
     montarTrsComNegociacoes() {
-        let _negociacoes = this.dados;
-        return _negociacoes.negociacoes.map(n => `<tr>
+        return this.dados.negociacoes.map(n => `<tr>
                 <td>${n.data.toLocaleDateString()}</td>
                 <td>${n.quantidade}</td>
                 <td>${n.valor}</td>
@@ -30,7 +29,6 @@ class NegociacaoView extends View {
             </tr>`).join('');
     }
     calcularVolumeTotal() {
-        let _negociacoes = this.dados;
-        return _negociacoes.negociacoes.reduce((sigma, negociacao) => sigma + negociacao.volume, 0);
+        return this.dados.negociacoes.reduce((sigma, negociacao) => sigma + negociacao.volume, 0);
     }
 }
