@@ -1,4 +1,4 @@
-class Negociacao {
+export class Negociacao {
     /**
      * Ao declarar a variável no construtor tipada com a definição de visibilidade,
      * criamos também os atributos da classe.

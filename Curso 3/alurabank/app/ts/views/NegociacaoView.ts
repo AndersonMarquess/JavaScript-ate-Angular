@@ -1,8 +1,10 @@
-namespace Views {
-    export class NegociacaoView extends Views.View<ListaNegociacao> {
+import { View } from './View';
+import{ ListaNegociacao } from '../models/ListaNegociacao';
 
-        protected template(): string {
-            return `<table class="table table-hover table-bordered">
+export class NegociacaoView extends View<ListaNegociacao> {
+
+    protected template(): string {
+        return `<table class="table table-hover table-bordered">
                 <thead>
                     <tr>
                         <th>DATA</th>
@@ -21,21 +23,20 @@ namespace Views {
                     <td>${this.calcularVolumeTotal()}</td>
                 </tfoot>
             </table>`;
-        }
+    }
 
-        private montarTrsComNegociacoes(): string {
-            return this.dados.negociacoes.map(n =>
-                `<tr>
+    private montarTrsComNegociacoes(): string {
+        return this.dados.negociacoes.map(n =>
+            `<tr>
                     <td>${n.data.toLocaleDateString()}</td>
                     <td>${n.quantidade}</td>
                     <td>${n.valor}</td>
                     <td>${n.volume}</td>
                 </tr>`
-            ).join('');
-        }
+        ).join('');
+    }
 
-        private calcularVolumeTotal(): number {
-            return this.dados.negociacoes.reduce((sigma, negociacao) => sigma + negociacao.volume, 0);
-        }
+    private calcularVolumeTotal(): number {
+        return this.dados.negociacoes.reduce((sigma, negociacao) => sigma + negociacao.volume, 0);
     }
 }

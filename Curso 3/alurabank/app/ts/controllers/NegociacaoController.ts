@@ -1,5 +1,9 @@
-class NegociacaoController {
+import { MensagemView } from '../views/MensagemView';
+import { NegociacaoView } from '../views/NegociacaoView';
+import { ListaNegociacao } from '../models/ListaNegociacao';
+import { Negociacao } from '../models/Negociacao';
 
+export class NegociacaoController {
     /**
      * Outra forma de criar os atributos da classe, sem declara-los no construtor.
      */
@@ -8,9 +12,9 @@ class NegociacaoController {
     private _valor: HTMLInputElement;
     //é o mesmo que _negociacoes = new ListaNegociacao() inferência de tipo.
     private _negociacoes: ListaNegociacao = new ListaNegociacao();
-    private _negociacaoView = new Views.NegociacaoView(this.getElementoComSeletor("#tabela-negociacoes"));
+    private _negociacaoView = new NegociacaoView(this.getElementoComSeletor("#tabela-negociacoes"));
 
-    private _mensagemView = new Views.MensagemView(this.getElementoComSeletor("#mensagemView"));
+    private _mensagemView = new MensagemView(this.getElementoComSeletor("#mensagemView"));
 
     constructor() {
         this._data = <HTMLInputElement>this.getElementoComSeletor("#data");

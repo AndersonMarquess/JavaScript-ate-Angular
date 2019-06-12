@@ -9,7 +9,9 @@
         //Não vai definir as variáveis como any
         "noImplicitAny": true,
         //Remove os comentários dos arquivos javascript finais.
-        "removeComments": true
+        "removeComments": true,
+        //Configuração para trabalhar com sistema de módulos do EcmaScript6 (ES2015).
+        "module": "system"
     },
     "include": [
         // Origem dos códigos que serão transformados em JavaScript.

@@ -1,3 +1,5 @@
+import { NegociacaoController } from "./controllers/NegociacaoController";
+
 const negociacaoCtrl = new NegociacaoController();
 
 document
