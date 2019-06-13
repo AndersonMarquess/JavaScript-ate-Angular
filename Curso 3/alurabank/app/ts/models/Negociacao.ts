@@ -2,26 +2,15 @@ export class Negociacao {
     /**
      * Ao declarar a variável no construtor tipada com a definição de visibilidade,
      * criamos também os atributos da classe.
+     * Variáveis do tipo readonly, podem ser acessadas fora da classe, mas não podem ser alterada.
      */
-    constructor(private _data: Date, private _quantidade: number, private _valor: number) { }
-
-    public get data(): Date {
-        return new Date(this._data.getTime());
-    }
-
-    public get quantidade(): number {
-        return this._quantidade;
-    }
-
-    public get valor(): number {
-        return this._valor;
-    }
+    constructor(readonly data: Date, readonly quantidade: number, readonly valor: number) { }
 
     public toString(): string {
-        return `Data: ${this.data.toLocaleDateString()}\nQuantidade: ${this._quantidade}\nValor: ${this.valor}`
+        return `Data: ${this.data.toLocaleDateString()}\nQuantidade: ${this.quantidade}\nValor: ${this.valor}`
     }
 
     public get volume(): number {
-        return this._quantidade * this._valor;
+        return this.quantidade * this.valor;
     }
 }
