@@ -38,14 +38,14 @@
     <br>
 
     <div id="tabela-negociacoes"></div>
-    
-    <!-- System.js usado para carregar os modulos em javascript (trabalha na camada de import/export). -->
+
+    <!-- System.js usado para carregar os módulos em javascript (trabalha na camada de import/export). -->
     <script src="lib/system.js"></script>
-    
+
     <!-- Configuração para importar o primeiro script -->
     <script>
         //Usado para omitir a extensão na hora do import
-        System.defaultJSExtension = true;
+        System.defaultJSExtensions = true;
         System.import('pos-compilar/js/app.js').catch(erro => console.log(erro));
     </script>
 </body>

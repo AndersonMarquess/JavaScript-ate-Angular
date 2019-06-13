@@ -9,11 +9,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compilador": "tsc",
-    "sempre-compilar": "tsc -w"
+    "sempre-compilar": "tsc -w",
+    "iniciar-servidor": "lite-server",
+    "iniciar-servidor-compilador" : "concurrently \"npm run sempre-compilar\" \"npm run iniciar-servidor\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^4.1.0",
+    "lite-server": "^2.5.3",
     "typescript": "^3.5.1"
   }
 }
