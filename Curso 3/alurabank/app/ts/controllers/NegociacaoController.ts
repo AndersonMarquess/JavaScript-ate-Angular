@@ -1,7 +1,6 @@
-import { MensagemView } from '../views/MensagemView';
-import { NegociacaoView } from '../views/NegociacaoView';
-import { ListaNegociacao } from '../models/ListaNegociacao';
-import { Negociacao } from '../models/Negociacao';
+//Barrel para simplificar imports
+import { MensagemView, NegociacaoView } from '../views/index';
+import { ListaNegociacao, Negociacao } from '../models/index';
 
 export class NegociacaoController {
     /**
