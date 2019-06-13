@@ -1,6 +1,7 @@
 //Barrel para simplificar imports
 import { MensagemView, NegociacaoView } from '../views/index';
 import { ListaNegociacao, Negociacao } from '../models/index';
+import { DiaDaSemana } from './DiaDaSemana';
 
 export class NegociacaoController {
     /**
@@ -11,15 +12,15 @@ export class NegociacaoController {
     private _valor: HTMLInputElement;
     //é o mesmo que _negociacoes = new ListaNegociacao() inferência de tipo.
     private _negociacoes: ListaNegociacao = new ListaNegociacao();
-    private _negociacaoView = new NegociacaoView(this.getElementoComSeletor("#tabela-negociacoes"));
+    private _negociacaoView = new NegociacaoView(this._getElementoComSeletor("#tabela-negociacoes"));
 
-    private _mensagemView = new MensagemView(this.getElementoComSeletor("#mensagemView"));
+    private _mensagemView = new MensagemView(this._getElementoComSeletor("#mensagemView"));
 
     constructor() {
-        this._data = <HTMLInputElement>this.getElementoComSeletor("#data");
-        this._quantidade = <HTMLInputElement>this.getElementoComSeletor("#quantidade");
+        this._data = <HTMLInputElement>this._getElementoComSeletor("#data");
+        this._quantidade = <HTMLInputElement>this._getElementoComSeletor("#quantidade");
         // <HTMLInputElement> é um cast.
-        this._valor = <HTMLInputElement>this.getElementoComSeletor("#valor");
+        this._valor = <HTMLInputElement>this._getElementoComSeletor("#valor");
         this._negociacaoView.update(this._negociacoes);
     }
 
@@ -28,12 +29,15 @@ export class NegociacaoController {
 
         console.log(`Dados input's ${this._data.value} - ${this._quantidade.value} - ${this._valor.value}`);
 
-        const negociacao = new Negociacao(
-            //Corrige o problema de replace da data no firefox.
-            new Date(this._data.value.replace(/-/g, ",")),
-            parseInt(this._quantidade.value),
-            parseFloat(this._valor.value)
-        );
+        //Corrige o problema de replace da data no firefox.
+        const data = new Date(this._data.value.replace(/-/g, ","));
+
+        if (this._isFinalDeSamana(data)) {
+            alert('Não é permitida criar negociação fora de dias úteis.');
+            return;
+        }
+
+        const negociacao = this._criarNegociacao(data);
 
         this._negociacoes.adicionar(negociacao);
         this._negociacoes.negociacoes.forEach(n => console.log(n.toString()));
@@ -41,7 +45,15 @@ export class NegociacaoController {
         this._mensagemView.update("Negociação adicionada com sucesso.");
     }
 
-    private getElementoComSeletor(seletor: string): Element {
+    private _getElementoComSeletor(seletor: string): Element {
         return document.querySelector(seletor);
+    }
+
+    private _criarNegociacao(data: Date) {
+        return new Negociacao(data, parseInt(this._quantidade.value), parseFloat(this._valor.value));
+    }
+
+    private _isFinalDeSamana(data: Date): boolean {
+        return data.getDay() == DiaDaSemana.Domingo || data.getDay() == DiaDaSemana.Sabado;
     }
 }
