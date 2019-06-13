@@ -11,7 +11,9 @@
         //Remove os comentários dos arquivos javascript finais.
         "removeComments": true,
         //Configuração para trabalhar com sistema de módulos do EcmaScript6 (ES2015).
-        "module": "system"
+        "module": "system",
+        //Use true para não permitir parâmetros null / undefined.
+        "strictNullChecks": false
     },
     "include": [
         // Origem dos códigos que serão transformados em JavaScript.
