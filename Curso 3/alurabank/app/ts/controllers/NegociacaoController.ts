@@ -2,6 +2,7 @@
 import { MensagemView, NegociacaoView } from '../views/index';
 import { ListaNegociacao, Negociacao } from '../models/index';
 import { DiaDaSemana } from './DiaDaSemana';
+import { ImprimirTempoDeExecucao } from "../helpers/AnotacoesPersonalizadas";
 
 export class NegociacaoController {
     /**
@@ -24,6 +25,7 @@ export class NegociacaoController {
         this._negociacaoView.update(this._negociacoes);
     }
 
+    @ImprimirTempoDeExecucao()
     public adicionar(event: Event): void {
         event.preventDefault();
 

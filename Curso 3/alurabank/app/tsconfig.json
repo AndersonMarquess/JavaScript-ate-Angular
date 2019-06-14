@@ -13,7 +13,9 @@
         //Configuração para trabalhar com sistema de módulos do EcmaScript6 (ES2015).
         "module": "system",
         //Use true para não permitir parâmetros null / undefined.
-        "strictNullChecks": false
+        "strictNullChecks": false,
+        //Habilita o uso de anotações personalizadas.
+        "experimentalDecorators": true
     },
     "include": [
         // Origem dos códigos que serão transformados em JavaScript.
