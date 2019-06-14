@@ -79,7 +79,8 @@ export class NegociacaoController {
 
                 nogeciacaoFiltrada.forEach(n => this._negociacoes.adicionar(n));
                 this._negociacaoView.update(this._negociacoes);
-            });
+            })
+            .catch((erro:Error) => this._mensagemView.update(erro.message));
 
         function verificarResposta(res: Response) {
             if (res.ok) {

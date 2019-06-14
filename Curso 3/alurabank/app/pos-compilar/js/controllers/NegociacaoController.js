@@ -67,7 +67,8 @@ System.register(["../views/index", "../models/index", "./DiaDaSemana", "../helpe
                         const nogeciacaoFiltrada = novasNegociacoes.filter(n => !negociJaImportadas.some(jaImportada => n.isIgual(jaImportada)));
                         nogeciacaoFiltrada.forEach(n => this._negociacoes.adicionar(n));
                         this._negociacaoView.update(this._negociacoes);
-                    });
+                    })
+                        .catch((erro) => this._mensagemView.update(erro.message));
                     function verificarResposta(res) {
                         if (res.ok) {
                             return res;

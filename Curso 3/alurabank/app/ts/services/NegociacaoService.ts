@@ -13,8 +13,11 @@ export class NegociacaoService {
             .then((dados: NegociacaoLegada[]) =>
                 dados.map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
             )
-            // coleta o throw error caso exista.
-            .catch(erro => console.log(erro));
+            // coleta o throw error caso exista e lança outro erro para ser exibido ao usuário.
+            .catch(erro => {
+                console.log(erro);
+                throw new Error('Não foi possível importar os dados no momento.');
+            });
     }
 }
 
