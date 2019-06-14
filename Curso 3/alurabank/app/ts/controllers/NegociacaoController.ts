@@ -67,8 +67,17 @@ export class NegociacaoController {
     public importarDadosAPI(): void {
 
         this._negociacaoService.buscarNegociacaoAPI(verificarResposta)
-            .then((negociacoes: Negociacao[]) => {
-                negociacoes.forEach(n => this._negociacoes.adicionar(n));
+            .then((novasNegociacoes: Negociacao[]) => {
+                const negociJaImportadas = this._negociacoes.negociacoes;
+
+                //O Filter vai devoltar um array com as negociação cuja condição der verdadeira.
+                const nogeciacaoFiltrada = novasNegociacoes.filter(
+                    // .some() -> testa se alguns dos elementos no array passam no teste (true para igual).
+                    // inverte o valor recebido, se some retornar true então a negociação já existe e não deve ser adicionada.
+                    n => !negociJaImportadas.some(jaImportada => n.isIgual(jaImportada))
+                );
+
+                nogeciacaoFiltrada.forEach(n => this._negociacoes.adicionar(n));
                 this._negociacaoView.update(this._negociacoes);
             });
 

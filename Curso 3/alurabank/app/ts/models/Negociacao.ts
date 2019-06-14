@@ -1,4 +1,6 @@
-export class Negociacao {
+import { Comparador } from "../helpers/Comparador";
+
+export class Negociacao implements Comparador<Negociacao> {
     /**
      * Ao declarar a variável no construtor tipada com a definição de visibilidade,
      * criamos também os atributos da classe.
@@ -12,5 +14,11 @@ export class Negociacao {
 
     public get volume(): number {
         return this.quantidade * this.valor;
+    }
+
+    isIgual(outro: Negociacao): boolean {
+        return this.data.toLocaleDateString().includes(outro.data.toLocaleDateString())
+            && this.quantidade == outro.quantidade
+            && this.valor == outro.valor;
     }
 }

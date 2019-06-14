@@ -17,6 +17,11 @@ System.register([], function (exports_1, context_1) {
                 get volume() {
                     return this.quantidade * this.valor;
                 }
+                isIgual(outro) {
+                    return this.data.toLocaleDateString().includes(outro.data.toLocaleDateString())
+                        && this.quantidade == outro.quantidade
+                        && this.valor == outro.valor;
+                }
             };
             exports_1("Negociacao", Negociacao);
         }

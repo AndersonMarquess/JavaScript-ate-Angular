@@ -62,8 +62,10 @@ System.register(["../views/index", "../models/index", "./DiaDaSemana", "../helpe
                 }
                 importarDadosAPI() {
                     this._negociacaoService.buscarNegociacaoAPI(verificarResposta)
-                        .then((negociacoes) => {
-                        negociacoes.forEach(n => this._negociacoes.adicionar(n));
+                        .then((novasNegociacoes) => {
+                        const negociJaImportadas = this._negociacoes.negociacoes;
+                        const nogeciacaoFiltrada = novasNegociacoes.filter(n => !negociJaImportadas.some(jaImportada => n.isIgual(jaImportada)));
+                        nogeciacaoFiltrada.forEach(n => this._negociacoes.adicionar(n));
                         this._negociacaoView.update(this._negociacoes);
                     });
                     function verificarResposta(res) {
