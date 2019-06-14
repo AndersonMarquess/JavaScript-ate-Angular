@@ -34,8 +34,7 @@ System.register(["../views/index", "../models/index", "./DiaDaSemana", "../helpe
                     this._valor = this._getElementoComSeletor("#valor");
                     this._negociacaoView.update(this._negociacoes);
                 }
-                adicionar(event) {
-                    event.preventDefault();
+                adicionar() {
                     console.log(`Dados input's ${this._data.value} - ${this._quantidade.value} - ${this._valor.value}`);
                     const data = new Date(this._data.value.replace(/-/g, ","));
                     if (this._isFinalDeSamana(data)) {
@@ -79,8 +78,12 @@ System.register(["../views/index", "../models/index", "./DiaDaSemana", "../helpe
                 }
             };
             __decorate([
+                AnotacoesPersonalizadas_1.Throttle(),
                 AnotacoesPersonalizadas_1.ImprimirTempoDeExecucao()
             ], NegociacaoController.prototype, "adicionar", null);
+            __decorate([
+                AnotacoesPersonalizadas_1.Throttle(500)
+            ], NegociacaoController.prototype, "importarDadosAPI", null);
             exports_1("NegociacaoController", NegociacaoController);
         }
     };

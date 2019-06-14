@@ -2,7 +2,7 @@
 import { MensagemView, NegociacaoView } from '../views/index';
 import { ListaNegociacao, Negociacao, NegociacaoLegada } from '../models/index';
 import { DiaDaSemana } from './DiaDaSemana';
-import { ImprimirTempoDeExecucao } from "../helpers/AnotacoesPersonalizadas";
+import { ImprimirTempoDeExecucao, Throttle } from "../helpers/AnotacoesPersonalizadas";
 
 export class NegociacaoController {
     /**
@@ -25,9 +25,11 @@ export class NegociacaoController {
         this._negociacaoView.update(this._negociacoes);
     }
 
+    @Throttle()
     @ImprimirTempoDeExecucao()
-    public adicionar(event: Event): void {
-        event.preventDefault();
+    public adicionar(): void {
+        //event é implícito
+        //event.preventDefault();
 
         console.log(`Dados input's ${this._data.value} - ${this._quantidade.value} - ${this._valor.value}`);
 
@@ -59,6 +61,7 @@ export class NegociacaoController {
         return data.getDay() == DiaDaSemana.Domingo || data.getDay() == DiaDaSemana.Sabado;
     }
 
+    @Throttle(500)
     public importarDadosAPI(): void {
         //funciona como o XMLHttpRequest 
         //Buscar informações no endpoint
@@ -67,7 +70,7 @@ export class NegociacaoController {
             .then(resp => verificarResposta(resp))
             //transformar resposta em json
             .then(resp => resp.json())
-            //transformar dados do json em negociacao e adicionar na lista de negociacao
+            //transformar dados do json em negociação e adicionar na lista de negociação
             .then(
                 (dados: NegociacaoLegada[]) => {
                     dados

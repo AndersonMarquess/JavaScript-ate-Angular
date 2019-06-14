@@ -26,6 +26,20 @@ System.register([], function (exports_1, context_1) {
         }
     }
     exports_1("ImprimirTempoDeExecucao", ImprimirTempoDeExecucao);
+    function Throttle(intervaloInvocacaoMS = 500) {
+        return function (referenciaDoAlvo, nomeDoMetodo, descriptor) {
+            const metodoOrigianl = descriptor.value;
+            let timer = 0;
+            descriptor.value = function (...args) {
+                if (event)
+                    event.preventDefault();
+                clearInterval(timer);
+                timer = setTimeout(() => metodoOrigianl.apply(this, args), intervaloInvocacaoMS);
+            };
+            return descriptor;
+        };
+    }
+    exports_1("Throttle", Throttle);
     return {
         setters: [],
         execute: function () {

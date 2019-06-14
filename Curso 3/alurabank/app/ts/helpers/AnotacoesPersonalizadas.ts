@@ -36,3 +36,23 @@ export function ImprimirTempoDeExecucao(isEmSegundos: boolean = false) {
         return `[Decorator] O tempo de execução do método: [${nomeDoMetodo}] foi ${tempo.toFixed(5)} ${unidade}`;
     }
 }
+
+/**
+ * Anotação para determinar tempo de espera, sempre que a função for chamada.
+ */
+export function Throttle(intervaloInvocacaoMS: number = 500) {
+    return function (referenciaDoAlvo: any, nomeDoMetodo: string, descriptor: PropertyDescriptor) {
+
+        const metodoOrigianl = descriptor.value;
+        let timer = 0;
+
+        descriptor.value = function (...args: any[]) {
+            //verifica se existem algum evento associado ao método.
+            if (event) event.preventDefault();
+            clearInterval(timer);
+            timer = setTimeout(() => metodoOrigianl.apply(this, args), intervaloInvocacaoMS);
+        }
+
+        return descriptor;
+    }
+}
