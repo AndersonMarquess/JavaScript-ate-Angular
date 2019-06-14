@@ -1,4 +1,4 @@
-System.register(["../views/index", "../models/index", "./DiaDaSemana", "../helpers/AnotacoesPersonalizadas"], function (exports_1, context_1) {
+System.register(["../views/index", "../models/index", "./DiaDaSemana", "../helpers/AnotacoesPersonalizadas", "../services/NegociacaoService"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -6,7 +6,7 @@ System.register(["../views/index", "../models/index", "./DiaDaSemana", "../helpe
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var index_1, index_2, DiaDaSemana_1, AnotacoesPersonalizadas_1, NegociacaoController;
+    var index_1, index_2, DiaDaSemana_1, AnotacoesPersonalizadas_1, NegociacaoService_1, NegociacaoController;
     var __moduleName = context_1 && context_1.id;
     return {
         setters: [
@@ -21,6 +21,9 @@ System.register(["../views/index", "../models/index", "./DiaDaSemana", "../helpe
             },
             function (AnotacoesPersonalizadas_1_1) {
                 AnotacoesPersonalizadas_1 = AnotacoesPersonalizadas_1_1;
+            },
+            function (NegociacaoService_1_1) {
+                NegociacaoService_1 = NegociacaoService_1_1;
             }
         ],
         execute: function () {
@@ -29,6 +32,7 @@ System.register(["../views/index", "../models/index", "./DiaDaSemana", "../helpe
                     this._negociacoes = new index_2.ListaNegociacao();
                     this._negociacaoView = new index_1.NegociacaoView(this._getElementoComSeletor("#tabela-negociacoes"));
                     this._mensagemView = new index_1.MensagemView(this._getElementoComSeletor("#mensagemView"));
+                    this._negociacaoService = new NegociacaoService_1.NegociacaoService();
                     this._data = this._getElementoComSeletor("#data");
                     this._quantidade = this._getElementoComSeletor("#quantidade");
                     this._valor = this._getElementoComSeletor("#valor");
@@ -54,19 +58,14 @@ System.register(["../views/index", "../models/index", "./DiaDaSemana", "../helpe
                     return new index_2.Negociacao(data, parseInt(this._quantidade.value), parseFloat(this._valor.value));
                 }
                 _isFinalDeSamana(data) {
-                    return data.getDay() == DiaDaSemana_1.DiaDaSemana.Domingo || data.getDay() == DiaDaSemana_1.DiaDaSemana.Sabado;
+                    return data.getDay() == DiaDaSemana_1.DiaDaSemana.Sabado || data.getDay() == DiaDaSemana_1.DiaDaSemana.Domingo;
                 }
                 importarDadosAPI() {
-                    fetch('http://localhost:8080/dados')
-                        .then(resp => verificarResposta(resp))
-                        .then(resp => resp.json())
-                        .then((dados) => {
-                        dados
-                            .map(dado => new index_2.Negociacao(new Date(), dado.vezes, dado.montante))
-                            .forEach(n => this._negociacoes.adicionar(n));
+                    this._negociacaoService.buscarNegociacaoAPI(verificarResposta)
+                        .then((negociacoes) => {
+                        negociacoes.forEach(n => this._negociacoes.adicionar(n));
                         this._negociacaoView.update(this._negociacoes);
-                    })
-                        .catch(erro => console.log(erro));
+                    });
                     function verificarResposta(res) {
                         if (res.ok) {
                             return res;

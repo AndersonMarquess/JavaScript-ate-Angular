@@ -1,8 +1,9 @@
 //Barrel para simplificar imports
 import { MensagemView, NegociacaoView } from '../views/index';
-import { ListaNegociacao, Negociacao, NegociacaoLegada } from '../models/index';
+import { ListaNegociacao, Negociacao } from '../models/index';
 import { DiaDaSemana } from './DiaDaSemana';
 import { ImprimirTempoDeExecucao, Throttle } from "../helpers/AnotacoesPersonalizadas";
+import { NegociacaoService } from "../services/NegociacaoService";
 
 export class NegociacaoController {
     /**
@@ -14,8 +15,9 @@ export class NegociacaoController {
     //é o mesmo que _negociacoes = new ListaNegociacao() inferência de tipo.
     private _negociacoes: ListaNegociacao = new ListaNegociacao();
     private _negociacaoView = new NegociacaoView(this._getElementoComSeletor("#tabela-negociacoes"));
-
     private _mensagemView = new MensagemView(this._getElementoComSeletor("#mensagemView"));
+
+    private _negociacaoService = new NegociacaoService();
 
     constructor() {
         this._data = <HTMLInputElement>this._getElementoComSeletor("#data");
@@ -58,29 +60,17 @@ export class NegociacaoController {
     }
 
     private _isFinalDeSamana(data: Date): boolean {
-        return data.getDay() == DiaDaSemana.Domingo || data.getDay() == DiaDaSemana.Sabado;
+        return data.getDay() == DiaDaSemana.Sabado || data.getDay() == DiaDaSemana.Domingo;
     }
 
     @Throttle(500)
     public importarDadosAPI(): void {
-        //funciona como o XMLHttpRequest 
-        //Buscar informações no endpoint
-        fetch('http://localhost:8080/dados')
-            //verificar conteúdo da resposta
-            .then(resp => verificarResposta(resp))
-            //transformar resposta em json
-            .then(resp => resp.json())
-            //transformar dados do json em negociação e adicionar na lista de negociação
-            .then(
-                (dados: NegociacaoLegada[]) => {
-                    dados
-                        .map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
-                        .forEach(n => this._negociacoes.adicionar(n));
-                    this._negociacaoView.update(this._negociacoes);
-                }
-            )
-            // coleta o throw error caso exista.
-            .catch(erro => console.log(erro));
+
+        this._negociacaoService.buscarNegociacaoAPI(verificarResposta)
+            .then((negociacoes: Negociacao[]) => {
+                negociacoes.forEach(n => this._negociacoes.adicionar(n));
+                this._negociacaoView.update(this._negociacoes);
+            });
 
         function verificarResposta(res: Response) {
             if (res.ok) {
