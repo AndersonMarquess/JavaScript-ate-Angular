@@ -1,6 +1,6 @@
 //Barrel para simplificar imports
 import { MensagemView, NegociacaoView } from '../views/index';
-import { ListaNegociacao, Negociacao } from '../models/index';
+import { ListaNegociacao, Negociacao, NegociacaoLegada } from '../models/index';
 import { DiaDaSemana } from './DiaDaSemana';
 import { ImprimirTempoDeExecucao } from "../helpers/AnotacoesPersonalizadas";
 
@@ -57,5 +57,34 @@ export class NegociacaoController {
 
     private _isFinalDeSamana(data: Date): boolean {
         return data.getDay() == DiaDaSemana.Domingo || data.getDay() == DiaDaSemana.Sabado;
+    }
+
+    public importarDadosAPI(): void {
+        //funciona como o XMLHttpRequest 
+        //Buscar informações no endpoint
+        fetch('http://localhost:8080/dados')
+            //verificar conteúdo da resposta
+            .then(resp => verificarResposta(resp))
+            //transformar resposta em json
+            .then(resp => resp.json())
+            //transformar dados do json em negociacao e adicionar na lista de negociacao
+            .then(
+                (dados: NegociacaoLegada[]) => {
+                    dados
+                        .map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
+                        .forEach(n => this._negociacoes.adicionar(n));
+                    this._negociacaoView.update(this._negociacoes);
+                }
+            )
+            // coleta o throw error caso exista.
+            .catch(erro => console.log(erro));
+
+        function verificarResposta(res: Response) {
+            if (res.ok) {
+                return res;
+            } else {
+                throw new Error(res.statusText);
+            }
+        }
     }
 }

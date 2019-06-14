@@ -13,6 +13,9 @@ System.register(["./controllers/NegociacaoController"], function (exports_1, con
             document
                 .querySelector(".form")
                 .addEventListener("submit", negociacaoCtrl.adicionar.bind(negociacaoCtrl));
+            document
+                .querySelector("#btn-importar-dados")
+                .addEventListener("click", negociacaoCtrl.importarDadosAPI.bind(negociacaoCtrl));
         }
     };
 });

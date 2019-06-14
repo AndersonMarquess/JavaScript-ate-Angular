@@ -57,6 +57,26 @@ System.register(["../views/index", "../models/index", "./DiaDaSemana", "../helpe
                 _isFinalDeSamana(data) {
                     return data.getDay() == DiaDaSemana_1.DiaDaSemana.Domingo || data.getDay() == DiaDaSemana_1.DiaDaSemana.Sabado;
                 }
+                importarDadosAPI() {
+                    fetch('http://localhost:8080/dados')
+                        .then(resp => verificarResposta(resp))
+                        .then(resp => resp.json())
+                        .then((dados) => {
+                        dados
+                            .map(dado => new index_2.Negociacao(new Date(), dado.vezes, dado.montante))
+                            .forEach(n => this._negociacoes.adicionar(n));
+                        this._negociacaoView.update(this._negociacoes);
+                    })
+                        .catch(erro => console.log(erro));
+                    function verificarResposta(res) {
+                        if (res.ok) {
+                            return res;
+                        }
+                        else {
+                            throw new Error(res.statusText);
+                        }
+                    }
+                }
             };
             __decorate([
                 AnotacoesPersonalizadas_1.ImprimirTempoDeExecucao()
