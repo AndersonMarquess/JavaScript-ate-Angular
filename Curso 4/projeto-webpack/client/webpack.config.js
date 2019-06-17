@@ -15,7 +15,8 @@ module.exports = {
         // Nome do arquivo que será criado na pasta 'dist', especificado abaixo.
         filename: 'bundle.js',
         // Cria o caminho da pasta atual até a pasta 'dist';
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: 'dist'
     },
     module: {
         rules: [
