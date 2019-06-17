@@ -1,5 +1,8 @@
 import { NegociacaoController } from './controllers/NegociacaoController.js';
 import { Negociacao } from './domain/index.js';
+//Se o import não iniciar com ./ então ele será buscado dentro pasta node_modules.
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap-theme.css'
 
 const controller = new NegociacaoController();
 const negociacao = new Negociacao(new Date(), 1, 200);

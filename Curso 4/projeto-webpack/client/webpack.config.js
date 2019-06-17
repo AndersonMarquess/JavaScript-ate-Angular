@@ -4,7 +4,7 @@ const babiliPlugin = require('babili-webpack-plugin');
 let plugins = [];
 
 // Verifica se a variável de ambiente chamada NODE_ENV (definado no package.json) possui o valor especificado.
-if(process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV == 'production') {
     plugins.push(new babiliPlugin());
 }
 
@@ -27,9 +27,30 @@ module.exports = {
                 use: {
                     loader: 'babel-loader'
                 }
-            }
+            },
+            { //Carregamento do bootstrap
+                test: /\.css$/,
+                // uso da ! para definir uma ordem de load, da direita para esquerda.
+                loader: 'style-loader!css-loader'
+            },
+            { // Início das regras de carregamento de fontes do bootstrap
+                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+            },
+            {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+            },
+            {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'file-loader'
+            },
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+            } // Fim das regras de carregamento de fontes do bootstrap
         ]
     },
-    //é o mesmo que: plugins = plugins, no ES6+ quando a chave tem o mesmo nome que o valor ela pode ser omitida.
+    //é o mesmo que: plugins = plugins, no ES6+ quando a chave tem o mesmo nome que o valor, ela pode ser omitida.
     plugins
 }
