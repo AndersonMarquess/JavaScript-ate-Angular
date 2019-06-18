@@ -2,10 +2,18 @@ const path = require('path');
 const babiliPlugin = require('babili-webpack-plugin');
 const extractTextPlugin = require('extract-text-webpack-plugin');
 const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const webpack = require('webpack');
 
 let plugins = [];
 // ao fazer o push, ele será usando em ambiente de produção e desenvolvimento
-plugins.push(new extractTextPlugin('styles.css'))
+plugins.push(new extractTextPlugin('styles.css'));
+
+//disponibiliza depêndencias em escopo global
+plugins.push(new webpack.ProvidePlugin({
+    //chave para acessar script - valor com localização do script
+    '$': 'jquery/dist/jquery.js',
+    'jQuery': 'jquery/dist/jquery.js'
+}));
 
 // Verifica se a variável de ambiente chamada NODE_ENV (definado no package.json) possui o valor especificado.
 if (process.env.NODE_ENV == 'production') {
