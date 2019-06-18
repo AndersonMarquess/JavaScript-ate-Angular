@@ -1,6 +1,7 @@
 const path = require('path');
 const babiliPlugin = require('babili-webpack-plugin');
 const extractTextPlugin = require('extract-text-webpack-plugin');
+const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 let plugins = [];
 // ao fazer o push, ele será usando em ambiente de produção e desenvolvimento
@@ -9,6 +10,15 @@ plugins.push(new extractTextPlugin('styles.css'))
 // Verifica se a variável de ambiente chamada NODE_ENV (definado no package.json) possui o valor especificado.
 if (process.env.NODE_ENV == 'production') {
     plugins.push(new babiliPlugin());
+    plugins.push(new optimizeCssAssetsPlugin({
+        cssProcessor: require('cssnano'),
+        cssProcessorOptions: {
+            discardComments: {
+                removeAll: true
+            }
+        },
+        canPrint: true
+    }));
 }
 
 module.exports = {
