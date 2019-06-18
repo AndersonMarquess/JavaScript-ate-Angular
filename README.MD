@@ -10,3 +10,4 @@ Objetivando aprender angular, resolvi documentar este processo salvando os códi
     3.1. TypeScript parte 2: Mais técnicas e boas práticas - Alura.
 
 4. Webpack: Manipulando módulos na sua webapp - Alura.
+5. Angular parte 1: Fundamentos - Alura.
