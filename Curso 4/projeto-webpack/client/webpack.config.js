@@ -1,7 +1,10 @@
 const path = require('path');
 const babiliPlugin = require('babili-webpack-plugin');
+const extractTextPlugin = require('extract-text-webpack-plugin');
 
 let plugins = [];
+// ao fazer o push, ele será usando em ambiente de produção e desenvolvimento
+plugins.push(new extractTextPlugin('styles.css'))
 
 // Verifica se a variável de ambiente chamada NODE_ENV (definado no package.json) possui o valor especificado.
 if (process.env.NODE_ENV == 'production') {
@@ -30,8 +33,14 @@ module.exports = {
             },
             { //Carregamento do bootstrap
                 test: /\.css$/,
+                use: extractTextPlugin.extract({
+                    // fallback usa style-load caso o extract não funcione.
+                    fallback: 'style-loader',
+                    // se der certo, usa o css-loader.
+                    use: 'css-loader'
+                })
                 // uso da ! para definir uma ordem de load, da direita para esquerda.
-                loader: 'style-loader!css-loader'
+                //loader: 'style-loader!css-loader'
             },
             { // Início das regras de carregamento de fontes do bootstrap
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
