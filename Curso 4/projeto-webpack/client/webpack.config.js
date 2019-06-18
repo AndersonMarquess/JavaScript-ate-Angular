@@ -15,8 +15,19 @@ plugins.push(new webpack.ProvidePlugin({
     'jQuery': 'jquery/dist/jquery.js'
 }));
 
+// Separação dos módulos do bundle.js, separando em pequenos pedaços para serem carregados sobre demanda.
+plugins.push(new webpack.optimize.CommonsChunkPlugin({
+    // identificador.
+    'name': 'vendor',
+    // nome do arquivo final.
+    'filename': 'vendor.bundle.js'
+}));
+
 // Verifica se a variável de ambiente chamada NODE_ENV (definado no package.json) possui o valor especificado.
 if (process.env.NODE_ENV == 'production') {
+    //Melhora a velocidade de processamento dos módulos do webpack com "scope hoisting".
+    plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+
     plugins.push(new babiliPlugin());
     plugins.push(new optimizeCssAssetsPlugin({
         cssProcessor: require('cssnano'),
@@ -31,7 +42,11 @@ if (process.env.NODE_ENV == 'production') {
 
 module.exports = {
     // Ponto de entrada, script inicial da aplicação, para resolver os outros.
-    entry: './app-src/app.js',
+    entry: {
+        app: './app-src/app.js',
+        //idenficador (name) declarado no CommonsChuckPlugin.
+        vendor: ['jquery', 'bootstrap', 'reflect-metadata']
+    },
     output: {
         // Nome do arquivo que será criado na pasta 'dist', especificado abaixo.
         filename: 'bundle.js',
