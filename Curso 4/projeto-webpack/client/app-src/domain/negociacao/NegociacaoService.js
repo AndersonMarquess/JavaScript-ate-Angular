@@ -12,45 +12,45 @@ export class NegociacaoService {
     obtemNegociacoesDaSemana() {
 
         return this._http
-            .get('http://localhost:3000/negociacoes/semana')
+            .get(`${SERVICE_URL}/negociacoes/semana`)
             .then(
-            dados =>
-                dados.map(objeto =>
-                    new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor))
-            ,
-            err => {
+                dados =>
+                    dados.map(objeto =>
+                        new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor))
+                ,
+                err => {
 
-                throw new ApplicationException('Não foi possível obter as negociações da semana');
-            }
+                    throw new ApplicationException('Não foi possível obter as negociações da semana');
+                }
             );
     }
 
     obtemNegociacoesDaSemanaAnterior() {
 
         return this._http
-            .get('http://localhost:3000/negociacoes/anterior')
+            .get(`${SERVICE_URL}/negociacoes/anterior`)
             .then(
-            dados => dados.map(objeto =>
-                new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor))
-            ,
-            err => {
+                dados => dados.map(objeto =>
+                    new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor))
+                ,
+                err => {
 
-                throw new ApplicationException('Não foi possível obter as negociações da semana anterior');
-            }
+                    throw new ApplicationException('Não foi possível obter as negociações da semana anterior');
+                }
             );
     }
 
     obtemNegociacoesDaSemanaRetrasada() {
 
         return this._http
-            .get('http://localhost:3000/negociacoes/retrasada')
+            .get(`${SERVICE_URL}/negociacoes/retrasada`)
             .then(
-            dados => dados.map(objeto =>
-                new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor))
-            ,
-            err => {
-                throw new ApplicationException('Não foi possível obter as negociações da semana retrasada');
-            }
+                dados => dados.map(objeto =>
+                    new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor))
+                ,
+                err => {
+                    throw new ApplicationException('Não foi possível obter as negociações da semana retrasada');
+                }
             );
     }
 

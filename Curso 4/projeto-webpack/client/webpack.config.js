@@ -35,8 +35,12 @@ plugins.push(new webpack.optimize.CommonsChunkPlugin({
     'filename': 'vendor.bundle.js'
 }));
 
+let SERVICE_URL = JSON.stringify('http://localhost:3000');
+
 // Verifica se a variável de ambiente chamada NODE_ENV (definido no package.json) possui o valor especificado.
 if (process.env.NODE_ENV == 'production') {
+    SERVICE_URL = JSON.stringify('htpp://endereco-api-producao');
+
     //Melhora a velocidade de processamento dos módulos do webpack com "scope hoisting".
     plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
 
@@ -51,6 +55,9 @@ if (process.env.NODE_ENV == 'production') {
         canPrint: true
     }));
 }
+
+//SERVICE_URL será disponibilizada em toda aplicação, com o valor definido [http://localhost ou http://api-producao].
+plugins.push(new webpack.DefinePlugin({ SERVICE_URL }));
 
 module.exports = {
     // Ponto de entrada, script inicial da aplicação, para resolver os outros.
