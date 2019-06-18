@@ -1,4 +1,4 @@
-import { Negociacoes, NegociacaoService, Negociacao } from '../domain/index.js';
+import { Negociacoes, Negociacao } from '../domain/index.js';
 import { NegociacoesView, MensagemView, Mensagem, DateConverter } from '../ui/index.js';
 import { getNegociacaoDao, Bind, getExceptionMessage, debounce, controller, bindEvent } from '../util/index.js';
 
@@ -20,8 +20,6 @@ export class NegociacaoController {
             new MensagemView('#mensagemView'),
             'texto'
         );
-
-        this._service = new NegociacaoService();
 
         this._init();
     }
@@ -75,7 +73,13 @@ export class NegociacaoController {
     async importaNegociacoes() {
 
         try {
-            const negociacoes = await this._service.obtemNegociacoesDoPeriodo();
+            // Isola o código de 'NegociacaoService' em um novo bundle, para trabalhar com lazy loading, 
+            // o código isolado não pode ter o import estático em nenhum lugar.
+            // System.import() é definido pelo webpack, novas versões do EcmaScript usam apenas o import().
+            const { NegociacaoService } = await System.import('../domain/negociacao/NegociacaoService');
+            const service = new NegociacaoService();
+
+            const negociacoes = await service.obtemNegociacoesDoPeriodo();
             console.log(negociacoes);
             negociacoes.filter(novaNegociacao =>
 
