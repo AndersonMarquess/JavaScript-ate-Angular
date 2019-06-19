@@ -2,10 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { PhotoComponent } from './photo/photo.component';
 
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
+		//Declaração para uso do componente criado.
+		PhotoComponent
 	],
 	imports: [
 		BrowserModule

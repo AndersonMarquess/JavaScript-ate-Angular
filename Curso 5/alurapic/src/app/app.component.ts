@@ -10,6 +10,5 @@ import { Component } from '@angular/core';
 // nome da classe: AppComponent
 export class AppComponent {
 	title = 'alurapic';
-	urlImg = 'https://images.unsplash.com/photo-1560859581-d51f66c66233?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80';
-	imgDescricao = 'Costa do mar';
+
 }
