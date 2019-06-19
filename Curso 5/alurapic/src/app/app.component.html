@@ -1,7 +1,5 @@
 <!-- Quando dentro das tags, usamos a {{}}angular expression. -->
 <h1>{{ title }}</h1>
 
-<ap-photo urlImg="https://images.unsplash.com/photo-1560859581-d51f66c66233?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80" 
-	imgDescricao="Beira do mar dia"></ap-photo>
-<ap-photo urlImg="https://images.unsplash.com/photo-1560932668-46f7a662129e?ixlib=rb-1.2.1&auto=format&fit=crop&w=332&q=80" 
-	imgDescricao="Beira do mar tarde"></ap-photo>
+<!-- For no array todasAsFotos -->
+<ap-photo *ngFor="let item of todasAsFotos" [urlImg]="item.urlImg" [imgDescricao]="item.imgDescricao"></ap-photo>
