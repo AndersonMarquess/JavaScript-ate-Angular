@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { PhotoService } from './photos/photo/photo.service';
+import { Photo } from './photos/photo/Photo';
 
 @Component({
 	selector: 'app-root',
@@ -10,15 +13,16 @@ import { Component } from '@angular/core';
 // nome da classe: AppComponent
 export class AppComponent {
 	title = 'alurapic';
+	todasAsFotos: Photo[] = [];
 
-	todasAsFotos = [
-		{
-			urlImg: "https://images.unsplash.com/photo-1560859581-d51f66c66233?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375",
-			imgDescricao: "Beira do mar dia"
-		},
-		{
-			urlImg: "https://images.unsplash.com/photo-1560932668-46f7a662129e?ixlib=rb-1.2.1&auto=format&fit=crop&w=332",
-			imgDescricao: "Beira do mar tarde"
-		}
-	];
+	constructor(private photoService: PhotoService) {}
+
+	ngOnInit(): void {
+		this.photoService.buscarFotosDoUsuario("flavio").subscribe(
+			// sucesso
+			fotos => this.todasAsFotos = fotos,
+			// erro
+			erro => console.log(erro.message)
+		);
+	}
 }
