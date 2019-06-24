@@ -1,3 +1,7 @@
+<p class="text-center text-muted" *ngIf="!rowsFotos.length">
+	Desculpe, nenhuma foto encontrada.
+</p>
+
 <ol class="list-unstyled">
 	<!-- For no array rowsFotos   -->
 	<li *ngFor="let linha of rowsFotos" class="row">

@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PhotoListComponent implements OnInit {
 
 	todasAsFotosOrigem: Photo[] = [];
+	filtro = '';
 
 	constructor(private photoService: PhotoService,
 		private rotaAtiva: ActivatedRoute) { }

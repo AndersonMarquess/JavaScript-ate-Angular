@@ -25,11 +25,12 @@ export class PhotosComponent implements OnChanges {
 	}
 
 	private montarLinhasDoGrid(): void {
+		let rowsFiltrado = [];
 		for (let i = 0; i < this.todasAsFotosDestino.length; i += 3) {
 			// array.slice retorna uma cópia da parte de um array, com o inicio e fim (não inclusivo) especificados.
 			// neste caso, todas as fotos de 0 até 2, de 3 até 5, de 6 até 8 e assim sucessivamente.
-			this.rowsFotos.push(this.todasAsFotosDestino.slice(i, i + 3));
-
+			rowsFiltrado.push(this.todasAsFotosDestino.slice(i, i + 3));
 		}
+		this.rowsFotos = rowsFiltrado;
 	}
 }
