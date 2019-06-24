@@ -5,13 +5,13 @@ import { PhotoService } from '../photo/photo.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-	selector: 'app-photo-list',
+	selector: 'ap-photo-list',
 	templateUrl: './photo-list.component.html',
 	styleUrls: ['./photo-list.component.css']
 })
 export class PhotoListComponent implements OnInit {
 
-	todasAsFotos: Photo[] = [];
+	todasAsFotosOrigem: Photo[] = [];
 
 	constructor(private photoService: PhotoService,
 		private rotaAtiva: ActivatedRoute) { }
@@ -21,7 +21,7 @@ export class PhotoListComponent implements OnInit {
 		const nomeUsuario = this.rotaAtiva.snapshot.params.userName;
 		this.photoService.buscarFotosDoUsuario(nomeUsuario).subscribe(
 			// sucesso
-			fotos => this.todasAsFotos = fotos,
+			fotos => this.todasAsFotosOrigem = fotos,
 			// erro
 			erro => console.log(erro.message)
 		);

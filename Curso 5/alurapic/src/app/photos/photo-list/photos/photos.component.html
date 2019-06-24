@@ -1,0 +1,8 @@
+<ol class="list-unstyled">
+	<!-- For no array rowsFotos   -->
+	<li *ngFor="let linha of rowsFotos" class="row">
+		<div *ngFor="let item of linha" class="col-4 ">
+			<ap-photo [urlImg]="item.url" [imgDescricao]="item.description"></ap-photo>
+		</div>
+	</li>
+</ol>

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { PhotoComponent } from './photo/photo.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoFormComponent } from './photo-form/photo-form.component';
+import { PhotosComponent } from './photo-list/photos/photos.component';
 
 /* 
  * A ideia de usar um "module" para cada funcionalidade tem como objetivo, diminuir a quantidade de declarações
@@ -18,7 +19,8 @@ import { PhotoFormComponent } from './photo-form/photo-form.component';
 	declarations: [
 		PhotoComponent, 
 		PhotoListComponent, 
-		PhotoFormComponent
+		PhotoFormComponent, 
+		PhotosComponent
 	],
 	imports: [
 		HttpClientModule,
