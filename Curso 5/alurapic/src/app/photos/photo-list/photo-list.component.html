@@ -9,7 +9,8 @@
 			(keyup)="filtro = $event.target.value" escuta o evento 'keyup' e passa seu valor para a variável 'filtro'.
 		 -->
 		<input class="rounded" type="search" placeholder="search..." autofocus 
-		(keyup)="filtro = $event.target.value">
+		(keyup)="debounce.next($event.target.value)">
+		<!-- debounce.next() é usado para atribuir o valor -->
 	</form>
 </div>
 
