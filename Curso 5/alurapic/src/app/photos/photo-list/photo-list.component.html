@@ -16,3 +16,5 @@
 
 <!-- criamos o nosso pipe e passamos o valor da variável 'filtro' para ele. -->
 <ap-photos [todasAsFotosDestino]="todasAsFotosOrigem | filterByDescription: filtro"></ap-photos>
+
+<ap-load-button [possuiMais]="possuiMaisOrigem" (click)="carregarFotos()"></ap-load-button>

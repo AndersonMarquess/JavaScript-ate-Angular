@@ -7,6 +7,7 @@ import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoFormComponent } from './photo-form/photo-form.component';
 import { PhotosComponent } from './photo-list/photos/photos.component';
 import { FilterByDescriptionPipe } from './photo-list/filterByDescription.pipe';
+import { LoadButtonComponent } from './photo-list/load-button/load-button.component';
 
 /* 
  * A ideia de usar um "module" para cada funcionalidade tem como objetivo, diminuir a quantidade de declarações
@@ -22,7 +23,8 @@ import { FilterByDescriptionPipe } from './photo-list/filterByDescription.pipe';
 		PhotoListComponent, 
 		PhotoFormComponent, 
 		PhotosComponent,
-		FilterByDescriptionPipe
+		FilterByDescriptionPipe,
+		LoadButtonComponent
 	],
 	imports: [
 		HttpClientModule,

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -18,5 +18,10 @@ export class PhotoService {
 		const observable = this.httpClient.get<Photo[]>(`http://localhost:3000/${nomeUsuario}/photos`);
 		// o Observable só fará o get, se alguem estiver subscrito.
 		return observable;
+	}
+
+	public buscarFotosDoUsuarioComPaginacao(nomeUsuario: string, numPagina: number): Observable<Photo[]> {
+		const parametros = new HttpParams().append('page', numPagina.toString());
+		return this.httpClient.get<Photo[]>(`http://localhost:3000/${nomeUsuario}/photos`, { params: parametros });
 	}
 }
