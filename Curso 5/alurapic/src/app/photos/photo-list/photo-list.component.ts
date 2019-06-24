@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Photo } from '../photo/Photo';
-import { PhotoService } from '../photo/photo.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,17 +13,11 @@ export class PhotoListComponent implements OnInit {
 	todasAsFotosOrigem: Photo[] = [];
 	filtro = '';
 
-	constructor(private photoService: PhotoService,
-		private rotaAtiva: ActivatedRoute) { }
+	constructor(private rotaAtiva: ActivatedRoute) { }
 
 	ngOnInit(): void {
-		// Pegar o valor informado na rota -> this.rotaAtiva.snapshot.params.nomeDefinidoNaRota.
-		const nomeUsuario = this.rotaAtiva.snapshot.params.userName;
-		this.photoService.buscarFotosDoUsuario(nomeUsuario).subscribe(
-			// sucesso
-			fotos => this.todasAsFotosOrigem = fotos,
-			// erro
-			erro => console.log(erro.message)
-		);
+		// pega o valor retornado pelo resolver desta rota.
+		// 'fotosOrigemResolver' variável definada na rota.
+		this.todasAsFotosOrigem = this.rotaAtiva.snapshot.data['fotosOrigemResolver'];
 	}
 }
