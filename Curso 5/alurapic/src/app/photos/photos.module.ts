@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 import { PhotoComponent } from './photo/photo.component';
-import { HttpClientModule } from '@angular/common/http';
+import { PhotoListComponent } from './photo-list/photo-list.component';
 
 /* 
  * A ideia de usar um "module" para cada funcionalidade tem como objetivo, diminuir a quantidade de declarações
@@ -12,9 +14,16 @@ import { HttpClientModule } from '@angular/common/http';
  */
 @NgModule({
 	// declaração dos componentes que serão usados.
-	declarations: [PhotoComponent],
+	declarations: [
+		PhotoComponent, 
+		PhotoListComponent
+	],
+	imports: [
+		HttpClientModule,
+		// CommonModule - possibilita o acesso as diretivas do angular (ex. *ngFor) para uso nos templates.
+		CommonModule
+	]
 	// exportação dos componentes que serão usados por outros componentes.
-	exports: [PhotoComponent],
-	imports: [HttpClientModule]
+	// exports: [PhotoComponent],
 })
 export class PhotosModule { }

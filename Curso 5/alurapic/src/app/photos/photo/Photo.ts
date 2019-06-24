@@ -8,6 +8,5 @@ export interface Photo {
 	description: string;
 	allowComments: boolean;
 	likes: number;
-	allowComments: number;
 	userId: number;
 }
