@@ -1,13 +1,8 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
 
-import { PhotoComponent } from './photo/photo.component';
-import { PhotoListComponent } from './photo-list/photo-list.component';
-import { PhotoFormComponent } from './photo-form/photo-form.component';
-import { PhotosComponent } from './photo-list/photos/photos.component';
-import { FilterByDescriptionPipe } from './photo-list/filterByDescription.pipe';
-import { LoadButtonComponent } from './photo-list/load-button/load-button.component';
+import { PhotoModule } from './photo/photo.module';
+import { PhotoFormModule } from './photo-form/photo-form.module';
+import { PhotoListModule } from './photo-list/photo-list.module';
 
 /* 
  * A ideia de usar um "module" para cada funcionalidade tem como objetivo, diminuir a quantidade de declarações
@@ -17,19 +12,11 @@ import { LoadButtonComponent } from './photo-list/load-button/load-button.compon
  * com todas as suas dependências é importado no app.module.ts.
  */
 @NgModule({
-	// declaração dos componentes que serão usados.
-	declarations: [
-		PhotoComponent, 
-		PhotoListComponent, 
-		PhotoFormComponent, 
-		PhotosComponent,
-		FilterByDescriptionPipe,
-		LoadButtonComponent
-	],
 	imports: [
-		HttpClientModule,
 		// CommonModule - possibilita o acesso as diretivas do angular (ex. *ngFor) para uso nos templates.
-		CommonModule
+		PhotoModule,
+		PhotoFormModule,
+		PhotoListModule
 	]
 })
 export class PhotosModule { }

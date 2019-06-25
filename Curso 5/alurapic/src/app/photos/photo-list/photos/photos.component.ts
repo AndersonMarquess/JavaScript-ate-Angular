@@ -15,10 +15,10 @@ export class PhotosComponent implements OnChanges {
 
 	constructor() { }
 
-	// método chamado quando o valor de uma propriedade inbound mudar. <ap-photos [propriedade]="xtop"></ap-photos>
+	// método chamado quando o valor de uma propriedade inbound mudar. <ap-photos [propriedade]="xpto"></ap-photos>
 	ngOnChanges(mudancas: SimpleChanges) {
 		//Se houver uma mudança, haverá a propriedade que foi alterada dentro da variável mudança.
-		//neste caso, verificamso se existe a propriedade todasAsFotosDestino.
+		//neste caso, verificamos se existe a propriedade todasAsFotosDestino.
 		if (mudancas.todasAsFotosDestino) {
 			this.montarLinhasDoGrid();
 		}
