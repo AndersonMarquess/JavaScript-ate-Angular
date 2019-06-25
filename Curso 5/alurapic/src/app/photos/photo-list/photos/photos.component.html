@@ -2,11 +2,19 @@
 	Desculpe, nenhuma foto encontrada.
 </p>
 
-<ol class="list-unstyled">
+<ol class="list-unstyled text-center">
 	<!-- For no array rowsFotos   -->
-	<li *ngFor="let linha of rowsFotos" class="row">
-		<div *ngFor="let item of linha" class="col-4 ">
-			<ap-photo [urlImg]="item.url" [imgDescricao]="item.description"></ap-photo>
+	<li *ngFor="let linha of rowsFotos" class="row no-gutters">
+		<div *ngFor="let item of linha" class="col-4">
+			<ap-card [titulo]="item.description">
+				<figure>
+					<ap-photo [urlImg]="item.url" [imgDescricao]="item.description"></ap-photo>
+					<figcaption>
+						<i aria-hidden="true" class="fa fa-heart-o fa-1x mr-2 ml-2"></i> {{ item.likes }}
+						<i aria-hidden="true" class="fa fa-comment-o fa-1x mr-2 ml-2"></i> {{ item.comments }}
+					</figcaption>
+				</figure>
+			</ap-card>
 		</div>
 	</li>
 </ol>
