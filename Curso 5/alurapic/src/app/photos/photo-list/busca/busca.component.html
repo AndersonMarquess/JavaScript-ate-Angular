@@ -1,0 +1,16 @@
+<div class="text-center mt-3 mb-3">
+	<form>
+		<i aria-hidden="true" class="fa fa-search mr-1"></i>
+		<!-- 
+			data binding [] -> do componente para o template.
+			event binding () -> do template para o componente.
+		 -->
+
+		<!-- 
+			(keyup)="filtro = $event.target.value" escuta o evento 'keyup' e passa seu valor para a variável 'filtro'.
+		 -->
+		<input class="rounded" type="search" placeholder="search..." autofocus
+			(keyup)="debounce.next($event.target.value)" [value]="conteudoBuscaComponent">
+		<!-- debounce.next() é usado para atribuir o valor -->
+	</form>
+</div>

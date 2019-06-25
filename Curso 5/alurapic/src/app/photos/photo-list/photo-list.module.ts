@@ -7,18 +7,22 @@ import { LoadButtonComponent } from './load-button/load-button.component';
 import { FilterByDescriptionPipe } from './filterByDescription.pipe';
 import { PhotoModule } from '../photo/photo.module';
 import { CardModule } from 'src/app/compartilhados/componentes/card/card.module';
+import { BuscaComponent } from './busca/busca.component';
+import { EscurecerAoSobreporModule } from 'src/app/compartilhados/diretivas/escurecer-ao-sobrepor/escurecer-ao-sobrepor.module';
 
 @NgModule({
 	declarations: [
 		PhotoListComponent,
 		PhotosComponent,
 		LoadButtonComponent,
-		FilterByDescriptionPipe
+		FilterByDescriptionPipe,
+		BuscaComponent
 	],
 	imports: [
 		CommonModule, 
 		PhotoModule,
-		CardModule
+		CardModule,
+		EscurecerAoSobreporModule
 	]
 })
 export class PhotoListModule { }

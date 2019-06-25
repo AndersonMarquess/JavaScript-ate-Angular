@@ -5,7 +5,7 @@
 <ol class="list-unstyled text-center">
 	<!-- For no array rowsFotos   -->
 	<li *ngFor="let linha of rowsFotos" class="row no-gutters">
-		<div *ngFor="let item of linha" class="col-4">
+		<div *ngFor="let item of linha" class="col-4" apEscurecerAoSobrepor>
 			<ap-card [titulo]="item.description">
 				<figure>
 					<ap-photo [urlImg]="item.url" [imgDescricao]="item.description"></ap-photo>

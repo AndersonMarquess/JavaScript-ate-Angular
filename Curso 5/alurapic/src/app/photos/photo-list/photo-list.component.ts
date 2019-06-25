@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { debounceTime } from "rxjs/operators";
-import { Subject } from 'rxjs';
 
 import { Photo } from '../photo/Photo';
 import { PhotoService } from '../photo/photo.service';
@@ -11,11 +9,10 @@ import { PhotoService } from '../photo/photo.service';
 	templateUrl: './photo-list.component.html',
 	styleUrls: ['./photo-list.component.css']
 })
-export class PhotoListComponent implements OnInit, OnDestroy {
+export class PhotoListComponent implements OnInit {
 
 	todasAsFotosOrigem: Photo[] = [];
 	filtro = '';
-	debounce = new Subject<string>();
 	possuiMaisOrigem = true;
 	nomeUsuario = '';
 	paginaAtual = 1;
@@ -27,23 +24,16 @@ export class PhotoListComponent implements OnInit, OnDestroy {
 		// pega o valor retornado pelo resolver desta rota.
 		// 'fotosOrigemResolver' variável definida na rota.
 		this.todasAsFotosOrigem = this.rotaAtiva.snapshot.data['fotosOrigemResolver'];
-		this.debounce
-			// debounceTime -> o evento não é invocado a cada keyup e sim após 300ms do ultimo keyup.
-			.pipe(debounceTime(300))
-			.subscribe((filtro: string) => this.filtro = filtro);
-
 		this.nomeUsuario = this.rotaAtiva.snapshot.params.userName;
-	}
-
-	ngOnDestroy() {
-		// Quando sairmos do componente ele desliga a escuta do debounce.
-		this.debounce.unsubscribe();
 	}
 
 	carregarFotos() {
 		this.service
 			.buscarFotosDoUsuarioComPaginacao(this.nomeUsuario, ++this.paginaAtual)
 			.subscribe(fotosResposta => {
+				//limpa o filtro
+				this.filtro = '';
+
 				// é preciso associar uma nova referência para que o @Input seja atualizado.
 				this.todasAsFotosOrigem = this.todasAsFotosOrigem.concat(fotosResposta);
 				if (fotosResposta.length == 0) this.possuiMaisOrigem = false;

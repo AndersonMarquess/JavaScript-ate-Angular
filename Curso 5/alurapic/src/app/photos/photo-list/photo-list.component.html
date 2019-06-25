@@ -1,19 +1,5 @@
-<div class="text-center mt-3 mb-3">
-	<form>
-		<i aria-hidden="true" class="fa fa-search mr-1"></i>
-		<!-- 
-			data binding [] -> do componente para o template.
-			event binding () -> do template para o componente.
-		 -->
-
-		 <!-- 
-			(keyup)="filtro = $event.target.value" escuta o evento 'keyup' e passa seu valor para a variável 'filtro'.
-		 -->
-		<input class="rounded" type="search" placeholder="search..." autofocus 
-		(keyup)="debounce.next($event.target.value)">
-		<!-- debounce.next() é usado para atribuir o valor -->
-	</form>
-</div>
+<!-- Ao digitar é um evento personalizado, criado no componente de busca. -->
+<ap-busca (aoDigitar)="filtro = $event" [conteudoBuscaComponent]="filtro"></ap-busca>
 
 <!-- criamos o nosso pipe e passamos o valor da variável 'filtro' para ele. -->
 <ap-photos [todasAsFotosDestino]="todasAsFotosOrigem | filterByDescription: filtro"></ap-photos>
