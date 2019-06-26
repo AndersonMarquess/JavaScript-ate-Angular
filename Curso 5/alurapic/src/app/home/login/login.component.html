@@ -1,23 +1,23 @@
 <h4 class="text-center">Login</h4>
 
 <!-- formGroup -> leva os dados deste formulário para variável formularioDeLogin no componente. -->
-<form [formGroup]="formularioDeLogin" class="form mt-4 container">
+<form [formGroup]="formularioDeLogin" class="form mt-4 container" (submit)="login()">
 
 	<div class="form-group">
 		<!-- formControlName é associado com nome presente no formBuilder -->
 		<input formControlName="nomeUsuario" class="form-control" placeholder="Nome do usuário" autofocus>
 		
-		<!-- formularioDeLogin.get('senha').errors.**nomeValidacao** = nome da validação especificada no formBuilder, neste caso required.-->
+		<!-- formularioDeLogin.get('nomeUsuario').errors.**nomeValidacao** = nome da validação especificada no formBuilder, neste caso required.-->
 		<!-- interrogação é usado para informar que talvez não exista o atributo -->
-		<small *ngIf="formularioDeLogin.get('nomeUsuario').errors?.required" class="text-danger d-block mt-2">O nome do usuário é obrigatório</small>
+		<ap-msg-validacao *ngIf="formularioDeLogin.get('nomeUsuario').errors?.required" detalhes="O nome do usuário é obrigatório"></ap-msg-validacao>
 	</div>
 	
 	<div class="form-group">
 		<input formControlName="senha" type="password" class="form-control" placeholder="Senha">
-		<small *ngIf="formularioDeLogin.get('senha').errors?.required" class="text-danger d-block mt-2">A senha é obrigatória</small>
+		<ap-msg-validacao *ngIf="formularioDeLogin.get('senha').errors?.required" detalhes="A senha é obrigatória"></ap-msg-validacao>
 	</div>
 
-	<!-- disabilita o botão caso exista algum dado inválido no formulário. -->
+	<!-- desabilita o botão caso exista algum dado inválido no formulário. -->
 	<button [disabled]="formularioDeLogin.invalid" type="submit" class="btn btn-primary btn-block">Entrar</button>
 
 </form>
