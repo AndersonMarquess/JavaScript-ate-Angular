@@ -2,9 +2,9 @@
 	Desculpe, nenhuma foto encontrada.
 </p>
 
-<ol class="list-unstyled text-center">
+<ol class="list-unstyled text-center container">
 	<!-- For no array rowsFotos   -->
-	<li *ngFor="let linha of rowsFotos" class="row no-gutters">
+	<li *ngFor="let linha of rowsFotos" class="row">
 		<div *ngFor="let item of linha" class="col-4" apEscurecerAoSobrepor>
 			<ap-card [titulo]="item.description">
 				<figure>
