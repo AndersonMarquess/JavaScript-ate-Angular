@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/auth.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { DetectorDePlataformaService } from 'src/app/core/detector-de-plataforma/detector-de-plataforma.service';
 
 @Component({
 	templateUrl: './login.component.html',
@@ -9,11 +11,13 @@ import { AuthService } from 'src/app/core/auth.service';
 export class LoginComponent implements OnInit {
 
 	formularioDeLogin: FormGroup;
+	@ViewChild('varDeTemplateDoInputNome', null) inputNomeUsuario: ElementRef<HTMLInputElement>;
 
-	constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+	constructor(private formBuilder: FormBuilder, private authService: AuthService,
+		private router: Router, private detectorPlataforma: DetectorDePlataformaService) { }
 
 	ngOnInit() {
-		
+
 		//validação de formulário
 		this.formularioDeLogin = this.formBuilder.group({
 			// A chave corresponde ao input presente no formulário do template.
@@ -27,10 +31,21 @@ export class LoginComponent implements OnInit {
 	login() {
 		const nome = this.formularioDeLogin.get('nomeUsuario').value;
 		const senha = this.formularioDeLogin.get('senha').value;
-	
-		this.authService.autenticar(nome, senha).subscribe( 
-				suce => console.log('deu certo', suce), 
-				erro => console.log(erro.message)
-			);
+
+		this.authService.autenticar(nome, senha).subscribe(
+			/*
+			 * No sucesso, o usuário é redirecionado.
+			 * ['user', nome] é o mesmo que -> user/nome.
+			 * também é possível usar, router.navigateByUrl('user/'+nome);
+			 */
+			sucesso => this.router.navigate(['user', nome]),
+			erro => {
+				if (this.detectorPlataforma.estaRodandoNoBrowser()) {
+					this.inputNomeUsuario.nativeElement.focus();
+				}
+
+				this.formularioDeLogin.reset();
+			}
+		);
 	}
 }

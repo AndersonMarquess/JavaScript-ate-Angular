@@ -5,16 +5,19 @@
 
 	<div class="form-group">
 		<!-- formControlName é associado com nome presente no formBuilder -->
-		<input formControlName="nomeUsuario" class="form-control" placeholder="Nome do usuário" autofocus>
-		
+		<input #varDeTemplateDoInputNome formControlName="nomeUsuario" class="form-control"
+			placeholder="Nome do usuário" autofocus>
+
 		<!-- formularioDeLogin.get('nomeUsuario').errors.**nomeValidacao** = nome da validação especificada no formBuilder, neste caso required.-->
 		<!-- interrogação é usado para informar que talvez não exista o atributo -->
-		<ap-msg-validacao *ngIf="formularioDeLogin.get('nomeUsuario').errors?.required" detalhes="O nome do usuário é obrigatório"></ap-msg-validacao>
+		<ap-msg-validacao *ngIf="formularioDeLogin.get('nomeUsuario').errors?.required"
+			detalhes="O nome do usuário é obrigatório"></ap-msg-validacao>
 	</div>
-	
+
 	<div class="form-group">
 		<input formControlName="senha" type="password" class="form-control" placeholder="Senha">
-		<ap-msg-validacao *ngIf="formularioDeLogin.get('senha').errors?.required" detalhes="A senha é obrigatória"></ap-msg-validacao>
+		<ap-msg-validacao *ngIf="formularioDeLogin.get('senha').errors?.required" detalhes="A senha é obrigatória">
+		</ap-msg-validacao>
 	</div>
 
 	<!-- desabilita o botão caso exista algum dado inválido no formulário. -->
