@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+
 import { UserService } from '../user/user.service';
 import { Usuario } from '../user/usuario';
 
@@ -11,13 +13,17 @@ export class HeaderComponent {
 
 	// é uma boa prática colocar um cifrão após o nome das variáveis do tipo observable.
 	user$: Observable<Usuario>;
-	usuario: Usuario;
 
-	constructor(usuarioService: UserService) {
+	constructor(private usuarioService: UserService, private router: Router) {
 		this.user$ = usuarioService.getUser();
+	}
 
-		this.user$.subscribe(user => { 
-			this.usuario = user;
-		});
+	logout(): void {
+		this.usuarioService.logout();
+		this.redirecionarParaLogin();
+	}
+	
+	private redirecionarParaLogin(): void {
+		this.router.navigateByUrl('/');
 	}
 }

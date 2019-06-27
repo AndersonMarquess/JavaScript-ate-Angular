@@ -34,4 +34,9 @@ export class UserService {
 
 		this.usuarioSubject.next(usuario);
 	}
+
+	logout() {
+		this.tokenService.removerToken();
+		this.usuarioSubject.next(null);
+	}
 }
