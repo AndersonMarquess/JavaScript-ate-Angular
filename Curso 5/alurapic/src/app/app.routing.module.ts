@@ -7,6 +7,7 @@ import { NotFoundComponent } from './erros/not-found/not-found.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { LoginComponent } from './home/login/login.component';
 import { AuthGuard } from './core/auth/auth.guard';
+import { CadastroComponent } from './home/cadastro/cadastro.component';
 
 const rotasDaAplicacao: Routes = [
 	{ 
@@ -14,6 +15,10 @@ const rotasDaAplicacao: Routes = [
 		component: LoginComponent, 
 		// ativa a guarda de rota para esta rota.
 		canActivate: [AuthGuard]
+	},
+	{ 
+		path: 'cadastrar', 
+		component: CadastroComponent, 
 	},
 	/* 
 	 * Rota de acesso e component que será carregado.
