@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { lowerCaseValidator } from 'src/app/compartilhados/validadores/lower-case.validator';
+import { NomeUsuarioValidatorService } from './nome-usuario.validator.service';
 
 @Component({
 	selector: 'ap-cadastro',
@@ -9,7 +10,7 @@ import { lowerCaseValidator } from 'src/app/compartilhados/validadores/lower-cas
 export class CadastroComponent implements OnInit {
 	cadastroForm: FormGroup;
 
-	constructor(private formBuilder: FormBuilder) { }
+	constructor(private formBuilder: FormBuilder, private nomeUsuarioValidator: NomeUsuarioValidatorService) { }
 
 	ngOnInit(): void {
 		this.cadastroForm = this.formBuilder.group({
@@ -30,14 +31,18 @@ export class CadastroComponent implements OnInit {
 				]
 			],
 			nomeUsuario: [
+				// valor do campo
 				'',
+				// validadores síncronos
 				[
 					Validators.required,
 					Validators.minLength(5),
 					Validators.maxLength(20),
 					// validador personalizado
 					lowerCaseValidator,
-				]
+				],
+				// validador assíncrono
+				this.nomeUsuarioValidator.verificarDisponibilidadeDeNome()
 			],
 			senha: [
 				'',

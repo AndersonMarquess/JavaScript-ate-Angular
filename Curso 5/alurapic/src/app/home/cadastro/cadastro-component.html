@@ -30,19 +30,27 @@
 		</ap-msg-validacao>
 		<ap-msg-validacao *ngIf="cadastroForm.get('nomeUsuario').errors?.maxlength" detalhes="Máximo de 20 caracteres.">
 		</ap-msg-validacao>
+
+		<!-- nomeIndisponivel - especificado no nome-usuario-validator-service -->
+		<ap-msg-validacao *ngIf="cadastroForm.get('nomeUsuario').errors?.nomeIndisponivel"
+			detalhes="Nome de usuário indisponível.">
+		</ap-msg-validacao>
+		<small *ngIf="cadastroForm.get('nomeUsuario').valid" class="text-success">Nome de usuário disponível.</small>
 	</div>
 
 	<div class="form-group">
 		<input formControlName="senha" type="password" placeholder="Senha" class="form-control">
 		<ap-msg-validacao *ngIf="cadastroForm.get('senha').errors?.required" detalhes="Este campo é obrigatório.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('senha').errors?.minlength" detalhes="Mínimo de 5 caracteres.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('senha').errors?.minlength" detalhes="Mínimo de 8 caracteres.">
 		</ap-msg-validacao>
 		<ap-msg-validacao *ngIf="cadastroForm.get('senha').errors?.maxlength" detalhes="Máximo de 14 caracteres.">
 		</ap-msg-validacao>
 	</div>
 
-	<button [disabled]="cadastroForm.invalid" class="btn btn-primary btn-block">Registrar</button>
+	<!-- cadastroForm.pending - verifica se existe alguma validação assíncrono rodando. -->
+	<button [disabled]="cadastroForm.invalid || cadastroForm.pending"
+		class="btn btn-primary btn-block">Registrar</button>
 
 	<p class="text-center pt-4">Já possui uma conta? <a [routerLink]="['/']">Entrar</a></p>
 </form>
