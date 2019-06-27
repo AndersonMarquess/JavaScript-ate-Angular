@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -6,18 +6,23 @@ import { lowerCaseValidator } from 'src/app/compartilhados/validadores/lower-cas
 import { CadastroService } from './cadastro.service';
 import { NomeUsuarioValidatorService } from './nome-usuario.validator.service';
 import { NovoUsuario } from './novo-usuario';
+import { DetectorDePlataformaService } from 'src/app/core/detector-de-plataforma/detector-de-plataforma.service';
 
 @Component({
 	selector: 'ap-cadastro',
 	templateUrl: './cadastro-component.html'
 })
 export class CadastroComponent implements OnInit {
+	
 	cadastroForm: FormGroup;
+	// inputEmail - é a variável de template.
+	@ViewChild("inputEmail", null) inputEmail: ElementRef<HTMLInputElement>;
 
 	constructor(private formBuilder: FormBuilder,
 		private nomeUsuarioValidator: NomeUsuarioValidatorService,
 		private cadastroService: CadastroService,
-		private router: Router) { }
+		private router: Router,
+		private detectorPlataforma: DetectorDePlataformaService) { }
 
 	ngOnInit(): void {
 		this.cadastroForm = this.formBuilder.group({
@@ -60,6 +65,10 @@ export class CadastroComponent implements OnInit {
 				]
 			],
 		});
+
+		if (this.detectorPlataforma.estaRodandoNoBrowser()) {
+			this.inputEmail.nativeElement.focus();
+		}
 	}
 
 	cadastrar() {

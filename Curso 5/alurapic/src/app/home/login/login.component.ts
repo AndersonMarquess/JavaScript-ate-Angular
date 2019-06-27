@@ -25,6 +25,10 @@ export class LoginComponent implements OnInit {
 			nomeUsuario: ['', Validators.required],
 			senha: ['', Validators.required]
 		});
+
+		if (this.detectorPlataforma.estaRodandoNoBrowser()) {
+			this.inputNomeUsuario.nativeElement.focus();
+		}
 	}
 
 	// chamado no evento de submit do form.

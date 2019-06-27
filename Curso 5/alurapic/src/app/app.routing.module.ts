@@ -8,17 +8,25 @@ import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { LoginComponent } from './home/login/login.component';
 import { AuthGuard } from './core/auth/auth.guard';
 import { CadastroComponent } from './home/cadastro/cadastro.component';
+import { HomeComponent } from './home/home.component';
 
 const rotasDaAplicacao: Routes = [
-	{ 
-		path: '', 
-		component: LoginComponent, 
-		// ativa a guarda de rota para esta rota.
-		canActivate: [AuthGuard]
-	},
-	{ 
-		path: 'cadastrar', 
-		component: CadastroComponent, 
+	{
+		path: '',
+		component: HomeComponent,
+		// Ativa a guarda de rota para esta rota.
+		canActivate: [AuthGuard],
+		// Rotas filhas, rederizadas no outlet.
+		children: [
+			{
+				path: '',
+				component: LoginComponent
+			},
+			{
+				path: 'cadastrar',
+				component: CadastroComponent
+			}
+		]
 	},
 	/* 
 	 * Rota de acesso e component que será carregado.

@@ -3,7 +3,7 @@
 <!-- É obrigatório o import de algum FormsModule sempre que se usa <forms> no angular. -->
 <form class="form mt-4 container" [formGroup]="cadastroForm" (submit)="cadastrar()">
 	<div class="form-group">
-		<input formControlName="email" placeholder="E-mail" class="form-control" autofocus>
+		<input #inputEmail formControlName="email" placeholder="E-mail" class="form-control" autofocus>
 		<ap-msg-validacao *ngIf="cadastroForm.get('email').errors?.required" detalhes="Este campo é obrigatório.">
 		</ap-msg-validacao>
 		<ap-msg-validacao *ngIf="cadastroForm.get('email').errors?.email" detalhes="O e-mail não é válido.">

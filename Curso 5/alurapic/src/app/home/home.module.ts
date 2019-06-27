@@ -6,11 +6,13 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MsgValidacaoModule } from '../compartilhados/componentes/msg-validacao/msg-validacao.module';
 import { CadastroComponent } from './cadastro/cadastro.component';
+import { HomeComponent } from './home.component';
 
 @NgModule({
 	declarations: [
 		LoginComponent, 
-		CadastroComponent
+		CadastroComponent,
+		HomeComponent
 	],
 	imports: [
 		CommonModule,
