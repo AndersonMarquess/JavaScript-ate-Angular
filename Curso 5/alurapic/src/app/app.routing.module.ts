@@ -6,9 +6,15 @@ import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
 import { NotFoundComponent } from './erros/not-found/not-found.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { LoginComponent } from './home/login/login.component';
+import { AuthGuard } from './core/auth/auth.guard';
 
 const rotasDaAplicacao: Routes = [
-	{ path: '', component: LoginComponent },
+	{ 
+		path: '', 
+		component: LoginComponent, 
+		// ativa a guarda de rota para esta rota.
+		canActivate: [AuthGuard]
+	},
 	/* 
 	 * Rota de acesso e component que será carregado.
 	 * :nomeVariavel igual hibernate, usar dois pontos antes.

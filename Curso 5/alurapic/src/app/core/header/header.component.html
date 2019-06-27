@@ -17,7 +17,13 @@
 		<!-- template com variável 'login' -->
 		<ng-template #login>
 			<span class="navbar-text">
-				Por favor, faça login.
+				<!-- 
+					O uso do href faz com que a página seja atualizada, substituímos ele por um routerLink,
+					o routerLink usa a mesma estrutura de array do router.navegate([]).
+				-->
+				<a [routerLink]="['/']">
+					Por favor, faça login.
+				</a>
 			</span>
 		</ng-template>
 	</nav>

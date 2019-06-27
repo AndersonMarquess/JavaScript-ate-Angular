@@ -12,6 +12,7 @@ export class UserService {
 	// BehaviorSubject exige que seja informado um valor inicial.
 	// Ele guarda o ultimo valor informado, desta forma ele (o valor) continua disponível mesmo após atualizar a página.
 	private usuarioSubject = new BehaviorSubject<Usuario>(null);
+	nomeUsuario: string;
 
 	constructor(private tokenService: TokenService) {
 		if (this.tokenService.possuiToken()) {
@@ -32,11 +33,20 @@ export class UserService {
 		const token = this.tokenService.getToken();
 		const usuario = jwt_decode(token) as Usuario;
 
+		this.nomeUsuario = usuario.name;
 		this.usuarioSubject.next(usuario);
 	}
 
 	logout() {
 		this.tokenService.removerToken();
 		this.usuarioSubject.next(null);
+	}
+
+	estaLogado() {
+		return this.tokenService.possuiToken();
+	}
+
+	getNomeUsuario() {
+		return this.nomeUsuario;
 	}
 }
