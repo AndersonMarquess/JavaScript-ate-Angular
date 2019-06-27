@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { lowerCaseValidator } from 'src/app/compartilhados/validadores/lower-case.validator';
+import { CadastroService } from './cadastro.service';
 import { NomeUsuarioValidatorService } from './nome-usuario.validator.service';
+import { NovoUsuario } from './novo-usuario';
 
 @Component({
 	selector: 'ap-cadastro',
@@ -10,7 +14,10 @@ import { NomeUsuarioValidatorService } from './nome-usuario.validator.service';
 export class CadastroComponent implements OnInit {
 	cadastroForm: FormGroup;
 
-	constructor(private formBuilder: FormBuilder, private nomeUsuarioValidator: NomeUsuarioValidatorService) { }
+	constructor(private formBuilder: FormBuilder,
+		private nomeUsuarioValidator: NomeUsuarioValidatorService,
+		private cadastroService: CadastroService,
+		private router: Router) { }
 
 	ngOnInit(): void {
 		this.cadastroForm = this.formBuilder.group({
@@ -22,7 +29,7 @@ export class CadastroComponent implements OnInit {
 					Validators.email
 				]
 			],
-			nomeCompleto: [
+			fullName: [
 				'',
 				[
 					Validators.required,
@@ -30,7 +37,7 @@ export class CadastroComponent implements OnInit {
 					Validators.maxLength(50)
 				]
 			],
-			nomeUsuario: [
+			userName: [
 				// valor do campo
 				'',
 				// validadores síncronos
@@ -44,7 +51,7 @@ export class CadastroComponent implements OnInit {
 				// validador assíncrono
 				this.nomeUsuarioValidator.verificarDisponibilidadeDeNome()
 			],
-			senha: [
+			password: [
 				'',
 				[
 					Validators.required,
@@ -53,5 +60,12 @@ export class CadastroComponent implements OnInit {
 				]
 			],
 		});
+	}
+
+	cadastrar() {
+		const novoUsuario = this.cadastroForm.getRawValue() as NovoUsuario;
+		
+		this.cadastroService.cadastrar(novoUsuario)
+			.subscribe(sucesso => this.router.navigate(['/']));
 	}
 }

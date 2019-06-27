@@ -1,7 +1,7 @@
 <h4 class="text-center">Registre-se para embarcar em um novo mundo!</h4>
 
 <!-- É obrigatório o import de algum FormsModule sempre que se usa <forms> no angular. -->
-<form class="form mt-4 container" [formGroup]="cadastroForm">
+<form class="form mt-4 container" [formGroup]="cadastroForm" (submit)="cadastrar()">
 	<div class="form-group">
 		<input formControlName="email" placeholder="E-mail" class="form-control" autofocus>
 		<ap-msg-validacao *ngIf="cadastroForm.get('email').errors?.required" detalhes="Este campo é obrigatório.">
@@ -11,40 +11,40 @@
 	</div>
 
 	<div class="form-group">
-		<input formControlName="nomeCompleto" placeholder="Nome completo" class="form-control">
-		<ap-msg-validacao *ngIf="cadastroForm.get('nomeCompleto').errors?.required"
+		<input formControlName="fullName" placeholder="Nome completo" class="form-control">
+		<ap-msg-validacao *ngIf="cadastroForm.get('fullName').errors?.required"
 			detalhes="Este campo é obrigatório."></ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('nomeCompleto').errors?.minlength" detalhes="Mínimo de 5 caracteres.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('fullName').errors?.minlength" detalhes="Mínimo de 5 caracteres.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('nomeCompleto').errors?.maxlength"
+		<ap-msg-validacao *ngIf="cadastroForm.get('fullName').errors?.maxlength"
 			detalhes="Máximo de 50 caracteres."></ap-msg-validacao>
 	</div>
 
 	<div class="form-group">
-		<input formControlName="nomeUsuario" placeholder="Nome de usuário" class="form-control">
-		<ap-msg-validacao *ngIf="cadastroForm.get('nomeUsuario').errors?.required" detalhes="Este campo é obrigatório.">
+		<input formControlName="userName" placeholder="Nome de usuário" class="form-control">
+		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.required" detalhes="Este campo é obrigatório.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('nomeUsuario').errors?.lowercase"
+		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.lowercase"
 			detalhes="O nome do usuário deve estar em minúsculo."></ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('nomeUsuario').errors?.minlength" detalhes="Mínimo de 5 caracteres.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.minlength" detalhes="Mínimo de 5 caracteres.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('nomeUsuario').errors?.maxlength" detalhes="Máximo de 20 caracteres.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.maxlength" detalhes="Máximo de 20 caracteres.">
 		</ap-msg-validacao>
 
 		<!-- nomeIndisponivel - especificado no nome-usuario-validator-service -->
-		<ap-msg-validacao *ngIf="cadastroForm.get('nomeUsuario').errors?.nomeIndisponivel"
+		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.nomeIndisponivel"
 			detalhes="Nome de usuário indisponível.">
 		</ap-msg-validacao>
-		<small *ngIf="cadastroForm.get('nomeUsuario').valid" class="text-success">Nome de usuário disponível.</small>
+		<small *ngIf="cadastroForm.get('userName').valid" class="text-success">Nome de usuário disponível.</small>
 	</div>
 
 	<div class="form-group">
-		<input formControlName="senha" type="password" placeholder="Senha" class="form-control">
-		<ap-msg-validacao *ngIf="cadastroForm.get('senha').errors?.required" detalhes="Este campo é obrigatório.">
+		<input formControlName="password" type="password" placeholder="Senha" class="form-control">
+		<ap-msg-validacao *ngIf="cadastroForm.get('password').errors?.required" detalhes="Este campo é obrigatório.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('senha').errors?.minlength" detalhes="Mínimo de 8 caracteres.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('password').errors?.minlength" detalhes="Mínimo de 8 caracteres.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('senha').errors?.maxlength" detalhes="Máximo de 14 caracteres.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('password').errors?.maxlength" detalhes="Máximo de 14 caracteres.">
 		</ap-msg-validacao>
 	</div>
 

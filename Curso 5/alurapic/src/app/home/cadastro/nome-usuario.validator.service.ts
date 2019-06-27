@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { debounceTime, switchMap, first, map } from "rxjs/operators";
-import { cadastroService } from './cadastro.service';
-import { Observable } from 'rxjs';
+import { CadastroService } from './cadastro.service';
 
 /*
  * Validador assíncrono, para verificar disponibilidade do nome do usuário.
@@ -10,7 +9,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: "root" })
 export class NomeUsuarioValidatorService {
 
-	constructor(private cadastroService: cadastroService) { }
+	constructor(private cadastroService: CadastroService) { }
 
 	verificarDisponibilidadeDeNome() {
 		return (control: AbstractControl) => {
