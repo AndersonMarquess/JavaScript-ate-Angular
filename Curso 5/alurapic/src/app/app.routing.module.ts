@@ -5,28 +5,20 @@ import { PhotoListComponent } from './photos/photo-list/photo-list.component';
 import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
 import { NotFoundComponent } from './erros/not-found/not-found.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
-import { LoginComponent } from './home/login/login.component';
-import { AuthGuard } from './core/auth/auth.guard';
-import { CadastroComponent } from './home/cadastro/cadastro.component';
-import { HomeComponent } from './home/home.component';
 
 const rotasDaAplicacao: Routes = [
 	{
+		// chega no endpoint vazio e redireciona para home
 		path: '',
-		component: HomeComponent,
-		// Ativa a guarda de rota para esta rota.
-		canActivate: [AuthGuard],
-		// Rotas filhas, rederizadas no outlet.
-		children: [
-			{
-				path: '',
-				component: LoginComponent
-			},
-			{
-				path: 'cadastrar',
-				component: CadastroComponent
-			}
-		]
+		// pathMatch: 'full' - importante, verificar se todo o caminho combinou antes de redirecionar.
+		pathMatch: 'full',
+		redirectTo: 'home'
+	},
+	{
+		path: 'home',
+		// Para usar o lazy loading, não podemos importar o module direto no app.module.
+		// Especificamos o caminho # Nome do module que será importada.
+		loadChildren: './home/home.module#HomeModule'
 	},
 	/* 
 	 * Rota de acesso e component que será carregado.
@@ -47,7 +39,10 @@ const rotasDaAplicacao: Routes = [
 ]
 
 @NgModule({
-	imports: [RouterModule.forRoot(rotasDaAplicacao)],
+	imports: [
+		// RouterModule.forRoot(rotasDaAplicacao, { useHash: true }) - para habilitar o # e aumentar a compatibilidade.
+		RouterModule.forRoot(rotasDaAplicacao)
+	],
 	// exportação dos componentes que serão usados por outros componentes, ao importar o AppRoutingModule.
 	exports: [RouterModule]
 })

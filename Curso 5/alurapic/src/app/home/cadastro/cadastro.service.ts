@@ -5,7 +5,8 @@ import { NovoUsuario } from './novo-usuario';
 
 const API_URL = "http://localhost:3000";
 
-@Injectable({ providedIn: "root" })
+// Injetado no HomeModule.
+@Injectable()
 export class CadastroService {
 
 	constructor(private httpClient: HttpClient) { }

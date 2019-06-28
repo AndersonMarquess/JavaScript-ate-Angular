@@ -6,7 +6,7 @@ import { CadastroService } from './cadastro.service';
 /*
  * Validador assíncrono, para verificar disponibilidade do nome do usuário.
  */
-@Injectable({ providedIn: "root" })
+@Injectable() // Ele não mais é injetado no root e sim no component que será usado.
 export class NomeUsuarioValidatorService {
 
 	constructor(private cadastroService: CadastroService) { }

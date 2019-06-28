@@ -7,10 +7,12 @@ import { LoginComponent } from './login/login.component';
 import { MsgValidacaoModule } from '../compartilhados/componentes/msg-validacao/msg-validacao.module';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { HomeComponent } from './home.component';
+import { HomeRoutingModule } from './home.routing.module';
+import { CadastroService } from './cadastro/cadastro.service';
 
 @NgModule({
 	declarations: [
-		LoginComponent, 
+		LoginComponent,
 		CadastroComponent,
 		HomeComponent
 	],
@@ -20,7 +22,12 @@ import { HomeComponent } from './home.component';
 		ReactiveFormsModule,
 		MsgValidacaoModule,
 		RouterModule,
-		FormsModule
+		FormsModule,
+		HomeRoutingModule
+	],
+	providers: [
+		// Service disponível apenas para componentes da Home.
+		CadastroService
 	]
 })
 export class HomeModule { }

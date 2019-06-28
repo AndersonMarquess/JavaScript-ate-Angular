@@ -10,10 +10,14 @@ import { DetectorDePlataformaService } from 'src/app/core/detector-de-plataforma
 
 @Component({
 	selector: 'ap-cadastro',
-	templateUrl: './cadastro-component.html'
+	templateUrl: './cadastro-component.html',
+	providers: [
+		// Este service é injetado diretamente aqui e não no root.
+		NomeUsuarioValidatorService
+	]
 })
 export class CadastroComponent implements OnInit {
-	
+
 	cadastroForm: FormGroup;
 	// inputEmail - é a variável de template.
 	@ViewChild("inputEmail", null) inputEmail: ElementRef<HTMLInputElement>;
@@ -73,7 +77,7 @@ export class CadastroComponent implements OnInit {
 
 	cadastrar() {
 		const novoUsuario = this.cadastroForm.getRawValue() as NovoUsuario;
-		
+
 		this.cadastroService.cadastrar(novoUsuario)
 			.subscribe(sucesso => this.router.navigate(['/']));
 	}
