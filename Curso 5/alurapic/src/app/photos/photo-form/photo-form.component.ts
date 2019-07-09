@@ -13,6 +13,7 @@ export class PhotoFormComponent implements OnInit {
 	formNovaFoto: FormGroup;
 	// Permite acesso ao binário do arquivo
 	fotoFile: File;
+	previewFotoBase64: string;
 
 	constructor(private formBuilder: FormBuilder, private photoService: PhotoService, private router: Router) { }
 
@@ -34,5 +35,16 @@ export class PhotoFormComponent implements OnInit {
 				sucesso => this.router.navigate([''])
 			);
 
+	}
+
+	deArquivoParaBase64(arquivo: File) {
+		this.fotoFile = arquivo;
+
+		const reader = new FileReader();
+		reader.readAsDataURL(arquivo);
+
+		reader.onload = (evento: any) => {
+			this.previewFotoBase64 = evento.target.result;
+		};
 	}
 }

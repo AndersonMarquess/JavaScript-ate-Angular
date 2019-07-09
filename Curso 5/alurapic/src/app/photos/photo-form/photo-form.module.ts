@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MsgValidacaoModule } from 'src/app/compartilhados/componentes/msg-validacao/msg-validacao.module';
+import { PhotoModule } from '../photo/photo.module';
 import { PhotoFormComponent } from './photo-form.component';
 
 @NgModule({
@@ -12,7 +13,8 @@ import { PhotoFormComponent } from './photo-form.component';
 		ReactiveFormsModule,
 		MsgValidacaoModule,
 		FormsModule,
-		RouterModule
+		RouterModule,
+		PhotoModule
 	]
 })
 export class PhotoFormModule { }

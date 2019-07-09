@@ -1,15 +1,39 @@
 <div class="container">
 	<form [formGroup]="formNovaFoto" class="row" (submit)="upload()">
 		<div class="col-md-6 text-center">
-			<!-- (change)="fotoFile = $event.target.files[0]" coleta as informações da imagem e permite acesso ao binário da img -->
-			<input type="file" formControlName="file" accept="image/*" (change)="fotoFile = $event.target.files[0]">
-			<ap-msg-validacao *ngIf="formNovaFoto.get('file').errors?.required" detalhes="Por favor, selecione a foto"></ap-msg-validacao>
+
+			<div class="form-group" *ngIf="!previewFotoBase64; else mostrarPreviewImg">
+
+				<!-- invoca o input com a variável de template "fileInput" -->
+				<button type="button" (click)="fileInput.click()" class="btn btn-primary">
+					<i class="fa fa-image fa-4x align-middle"></i>
+				</button>
+
+				<!-- (change)="deArquivoParaBase64("$event.target.files[0]") coleta as informações da imagem e permite acesso ao binário da img -->
+				<input #fileInput hidden type="file" formControlName="file" accept="image/*"
+					(change)="deArquivoParaBase64($event.target.files[0])">
+
+				<ap-msg-validacao *ngIf="formNovaFoto.get('file').errors?.required"
+					detalhes="Por favor, selecione a foto">
+				</ap-msg-validacao>
+
+			</div>
+
+			<!-- se existir conteúdo dentro da variável previewFotoBase64 -->
+			<ng-template #mostrarPreviewImg>
+				<div class="text-center">
+					<ap-photo [urlImg]="previewFotoBase64" [imgDescricao]="Preview"></ap-photo>
+				</div>
+			</ng-template>
+
 		</div>
 
 		<div class="col-md-6">
 			<div class="form-group">
-				<textarea class="form-control form-control-sm" formControlName="description" placeholder="Descrição da foto"></textarea>
-				<ap-msg-validacao *ngIf="formNovaFoto.get('description').errors?.maxlength" detalhes="A descrição deve conter no máximo 300 caracteres"></ap-msg-validacao>
+				<textarea class="form-control form-control-sm" formControlName="description"
+					placeholder="Descrição da foto"></textarea>
+				<ap-msg-validacao *ngIf="formNovaFoto.get('description').errors?.maxlength"
+					detalhes="A descrição deve conter no máximo 300 caracteres"></ap-msg-validacao>
 			</div>
 
 			<div class="form-group">
