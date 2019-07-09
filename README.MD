@@ -12,4 +12,6 @@ Objetivando aprender angular, resolvi documentar este processo salvando os códi
 4. Webpack: Manipulando módulos na sua webapp - Alura.
 5. Angular parte 1: Fundamentos - Alura.
 
-	5.1 Angular parte 2: Autenticação, Forms e lazy loading - Alura.
+	5.1 Angular parte 2: Autenticação, forms e lazy loading - Alura.
+	
+	5.2 Angular parte 3: Upload, build e novos componentes - Alura.
