@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { HomeComponent } from './home.component';
-import { AuthGuard } from '../core/auth/auth.guard';
-import { LoginComponent } from './login/login.component';
+import { LoginGuard } from '../core/auth/login.guard';
 import { CadastroComponent } from './cadastro/cadastro.component';
+import { HomeComponent } from './home.component';
+import { LoginComponent } from './login/login.component';
+
 
 const rotasFilhas: Routes = [
 	{
 		path: '',
 		component: HomeComponent,
 		// Ativa a guarda de rota para esta rota.
-		canActivate: [AuthGuard],
+		canActivate: [LoginGuard],
 		// Rotas filhas, rederizadas no outlet.
 		children: [
 			{
