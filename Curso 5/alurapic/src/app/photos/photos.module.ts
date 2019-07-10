@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-
-import { PhotoModule } from './photo/photo.module';
+import { PhotoDetailsModule } from './photo-details/photo-details.module';
 import { PhotoFormModule } from './photo-form/photo-form.module';
 import { PhotoListModule } from './photo-list/photo-list.module';
+import { PhotoModule } from './photo/photo.module';
 
 /* 
  * A ideia de usar um "module" para cada funcionalidade tem como objetivo, diminuir a quantidade de declarações
@@ -16,7 +16,8 @@ import { PhotoListModule } from './photo-list/photo-list.module';
 		// CommonModule - possibilita o acesso as diretivas do angular (ex. *ngFor) para uso nos templates.
 		PhotoModule,
 		PhotoFormModule,
-		PhotoListModule
+		PhotoListModule,
+		PhotoDetailsModule
 	]
 })
 export class PhotosModule { }

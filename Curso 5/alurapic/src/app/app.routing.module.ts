@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AutenticacaoObrigatoriaGuard } from './core/auth/autenticacao-obrigatoria.guard';
 import { NotFoundComponent } from './erros/not-found/not-found.component';
+import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
 import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
 import { PhotoListComponent } from './photos/photo-list/photo-list.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
@@ -36,6 +37,11 @@ const rotasDaAplicacao: Routes = [
 	{
 		path: 'p/add',
 		component: PhotoFormComponent,
+		canActivate: [AutenticacaoObrigatoriaGuard]
+	},
+	{
+		path: 'p/:photoId',
+		component: PhotoDetailsComponent,
 		canActivate: [AutenticacaoObrigatoriaGuard]
 	},
 	/* Caminho coringa para lidar com rotas inexistentes */

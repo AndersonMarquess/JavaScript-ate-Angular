@@ -1,0 +1,21 @@
+<div class="container" *ngIf="(photo$ | async) as photo">
+	<div class="row justify-content-md-center bg-white border p-2">
+		<div class="col-md-auto">
+			<ap-photo [urlImg]="photo.url" [imgDescricao]="photo.description"></ap-photo>
+		</div>
+		<div class="col col-lg-4">
+			<header>
+				<h5 class="text-center break-word mb-0 mt-3">{{ photo.description | uppercase }}</h5>
+				<hr>
+			</header>
+			<form>
+				<div class="input-group">
+					<textarea class="form-control"></textarea>
+					<div class="input-group-append">
+						<button class="btn btn-primary pull-left">Publicar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { Photo } from './Photo';
+
 
 const API_URL = `http://localhost:3000`;
 @Injectable({
@@ -31,9 +31,14 @@ export class PhotoService {
 
 		const formData = new FormData();
 		formData.append("description", description);
-		formData.append("allowComments", allowComments? "true": "false");
+		formData.append("allowComments", allowComments ? "true" : "false");
 		formData.append("imageFile", fotoArquivo);
 
 		return this.httpClient.post(endereco, formData);
+	}
+
+	public buscarPorId(id: string): Observable<Photo> {
+		const endereco = `${API_URL}/photos/${id}`;
+		return this.httpClient.get<Photo>(endereco);
 	}
 }
