@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Photo } from './Photo';
-
+import { PhotoComment } from './photo-comment';
 
 const API_URL = `http://localhost:3000`;
 @Injectable({
@@ -37,8 +37,19 @@ export class PhotoService {
 		return this.httpClient.post(endereco, formData);
 	}
 
-	public buscarPorId(id: string): Observable<Photo> {
-		const endereco = `${API_URL}/photos/${id}`;
+	public buscarPorId(idPhoto: number): Observable<Photo> {
+		const endereco = `${API_URL}/photos/${idPhoto}`;
 		return this.httpClient.get<Photo>(endereco);
+	}
+
+	public bucarComentarios(idPhoto: number): Observable<PhotoComment[]> {
+		const endereco = `${API_URL}/photos/${idPhoto}/comments`;
+		return this.httpClient.get<PhotoComment[]>(endereco);
+	}
+
+	public addComentario(comentario: string, idPhoto: number): Observable<any> {
+		const endereco = `${API_URL}/photos/${idPhoto}/comments`;
+		const objPost = { commentText: comentario };
+		return this.httpClient.post(endereco, objPost);
 	}
 }
