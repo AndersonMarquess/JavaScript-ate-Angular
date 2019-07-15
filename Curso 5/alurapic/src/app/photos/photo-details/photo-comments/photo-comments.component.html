@@ -1,0 +1,23 @@
+<div *ngIf="(comments$ | async) as comentarios">
+
+	<ul class="list-unstyled">
+		<li *ngFor="let comentario of comentarios">
+			<a class="text-dark font-weight-bold mr-1" [routerLink]="['/user', comentario.userName]">
+				{{ comentario.userName }}</a>
+			<em>{{ comentario.date | date:'dd-MM-yyyy HH:mm' }}</em>
+			<p class="break-word mb-2">{{ comentario.text }}</p>
+		</li>
+	</ul>
+
+	<form [formGroup]="formNovoComentario" (submit)="comentar()">
+		<div class="input-group">
+			<textarea class="form-control" formControlName="comment"></textarea>
+			<div class="input-group-append">
+				<button class="btn btn-primary pull-left" [disabled]="formNovoComentario.invalid">Publicar</button>
+			</div>
+		</div>
+
+		<ap-msg-validacao *ngIf="formNovoComentario.get('comment').errors?.maxlength"
+			detalhes="O comentário deve conter no máximo 300 caracteres"></ap-msg-validacao>
+	</form>
+</div>
