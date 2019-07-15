@@ -1,0 +1,5 @@
+.lista-comentarios {
+	height: 300px;
+	/* Mostra a barra de scroll se a altura do elemento for mairo que 300px */
+	overflow-y: auto;
+}

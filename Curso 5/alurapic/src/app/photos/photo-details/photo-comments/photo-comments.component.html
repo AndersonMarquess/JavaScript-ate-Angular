@@ -1,6 +1,6 @@
 <div *ngIf="(comments$ | async) as comentarios">
 
-	<ul class="list-unstyled">
+	<ul class="list-unstyled lista-comentarios">
 		<li *ngFor="let comentario of comentarios">
 			<a class="text-dark font-weight-bold mr-1" [routerLink]="['/user', comentario.userName]">
 				{{ comentario.userName }}</a>

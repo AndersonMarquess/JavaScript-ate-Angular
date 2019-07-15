@@ -21,10 +21,13 @@ export class PhotoListComponent implements OnInit {
 		private service: PhotoService) { }
 
 	ngOnInit(): void {
-		// pega o valor retornado pelo resolver desta rota.
-		// 'fotosOrigemResolver' variável definida na rota.
-		this.todasAsFotosOrigem = this.rotaAtiva.snapshot.data['fotosOrigemResolver'];
-		this.nomeUsuario = this.rotaAtiva.snapshot.params.userName;
+		// sempre que mudar o valor do parâmetro na rota, ele chama os novos dados.
+		this.rotaAtiva.params.subscribe(mudouRota => {
+			// pega o valor retornado pelo resolver desta rota.
+			// 'fotosOrigemResolver' variável definida na rota.
+			this.todasAsFotosOrigem = this.rotaAtiva.snapshot.data['fotosOrigemResolver'];
+			this.nomeUsuario = this.rotaAtiva.snapshot.params.userName;
+		});
 	}
 
 	carregarFotos() {
