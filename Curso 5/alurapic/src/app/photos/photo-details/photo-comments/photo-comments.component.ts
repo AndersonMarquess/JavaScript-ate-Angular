@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 import { PhotoComment } from '../../photo/photo-comment';
 import { PhotoService } from '../../photo/photo.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
 	selector: 'ap-photo-comments',
@@ -19,16 +19,26 @@ export class PhotoCommentsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.comments$ = this.photoService.bucarComentarios(this.photoId);
-		
+
 		this.formNovoComentario = this.formBuilder.group({
 			comment: ['', Validators.maxLength(300)]
 		});
 	}
 
-	comentar() {
+	public comentar(): void {
 		const comentario = this.formNovoComentario.get("comment").value;
-		this.photoService
+
+		// o retorno é o observable de buscarComentario e não o observable de addComentario,
+		// esse troca foi alcançada com o switchMap.
+		this.comments$ = this.photoService
 			.addComentario(comentario, this.photoId)
-			.subscribe(sucesso => this.formNovoComentario.reset());
+			//Sai do fluxo de adicionar comentarios e chama o de buscarComentarios.
+			.pipe(
+				switchMap(outroObservable => this.photoService.bucarComentarios(this.photoId))
+			)
+			// o tap é executado antes de retornar o observable de buscarComentarios.
+			.pipe(
+				tap(antesDeRetornarObservable => this.formNovoComentario.reset())
+			);
 	}
 }
