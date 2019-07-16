@@ -10,7 +10,8 @@
 				<div class="text-left mt-1">
 					<i class="fa fa-comment-o fa-1x mr-2 ml-2"></i>{{ photo.comments }}
 					<!-- Ativa o modal -->
-					<i (click)="mostrarEOcultarModal()" class="fa fa-trash-o fa-1x ml-2 pull-right"></i>
+					<i (click)="mostrarEOcultarModal()" class="fa fa-trash-o fa-1x ml-2 pull-right" 
+						apenasCriadorPhoto [photoCriada]="photo"></i>
 				</div>
 				<hr class="mt-0">
 			</header>
