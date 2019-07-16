@@ -14,6 +14,7 @@ export class PhotoDetailsComponent implements OnInit {
 	idPhotoDetails: number;
 	isModalVisivel = false;
 	elementoModal: HTMLElement;
+	timerCrescente: any = 0;
 
 	constructor(private activatedRoute: ActivatedRoute, private photoService: PhotoService, private router: Router,
 		private elementRef: ElementRef, private renderer: Renderer) { }
@@ -25,9 +26,19 @@ export class PhotoDetailsComponent implements OnInit {
 	}
 
 	removerFoto(): void {
-		this.photoService
-			.removerFoto(this.idPhotoDetails)
-			.subscribe(sucesso => this.router.navigate(['/']));
+		this.debounceRemoverFoto();
+	}
+
+	private debounceRemoverFoto(): void {
+		// toda vez que a função é chamada, o valor da variável timerCrescente é resetado para 0.
+		clearTimeout(this.timerCrescente);
+
+		// só executa a função dentro do timeout, quando o valor da variável timerCrescente for igual a 3000.
+		this.timerCrescente = setTimeout(() => {
+			this.photoService
+				.removerFoto(this.idPhotoDetails)
+				.subscribe(sucesso => this.router.navigate(['/']));
+		}, 700);
 	}
 
 	mostrarEOcultarModal(): void {
