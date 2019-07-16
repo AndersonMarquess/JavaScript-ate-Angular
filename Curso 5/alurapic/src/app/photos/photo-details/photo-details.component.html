@@ -6,11 +6,41 @@
 
 		<div class="col col-lg-4">
 			<header>
-				<h5 class="text-center break-word mb-0 mt-3">{{ photo.description | uppercase }}</h5>
-				<hr>
+				<h5 class="text-left break-word mb-0 mt-3">{{ photo.description | uppercase }}</h5>
+				<div class="text-left mt-1">
+					<i class="fa fa-comment-o fa-1x mr-2 ml-2"></i>{{ photo.comments }}
+					<!-- Ativa o modal -->
+					<i (click)="mostrarEOcultarModal()" class="fa fa-trash-o fa-1x ml-2 pull-right"></i>
+				</div>
+				<hr class="mt-0">
 			</header>
 
-			<ap-photo-comments [photoId]="idPhotoDetails"></ap-photo-comments>
+			<!-- Modal -->
+			<div class="relativo-modal">
+				<div class="modal-background-escuro align-items-center justify-content-center" id="modal-background">
+					<div class="modal-simples">
+						<header>
+							<h6 class="font-weight-bold text-left">Remover foto</h6>
+						</header>
+						<hr>
+						<div>
+							<p>Deseja realmente remover a foto?</p>
+						</div>
+						<hr>
+						<footer class="text-right">
+							<button class="btn btn-secondary m-1" (click)="mostrarEOcultarModal()">Cancelar</button>
+							<button class="btn btn-danger m-1" (click)="removerFoto()">Confirmar</button>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+			<ap-photo-comments *ngIf="photo.allowComments; else semComentarios" [photoId]="idPhotoDetails">
+			</ap-photo-comments>
+
+			<ng-template #semComentarios>
+				O usuário desabilitou os comentários para esta foto.
+			</ng-template>
 		</div>
 	</div>
 </div>

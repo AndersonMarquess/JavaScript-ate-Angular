@@ -52,4 +52,9 @@ export class PhotoService {
 		const objPost = { commentText: comentario };
 		return this.httpClient.post(endereco, objPost);
 	}
+
+	public removerFoto(idPhoto: number): Observable<any> {
+		const endereco = `${API_URL}/photos/${idPhoto}`;
+		return this.httpClient.delete(endereco);
+	}
 }
