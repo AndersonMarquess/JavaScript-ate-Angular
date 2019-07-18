@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Photo } from './Photo';
 import { PhotoComment } from './photo-comment';
 
@@ -56,5 +57,21 @@ export class PhotoService {
 	public removerFoto(idPhoto: number): Observable<any> {
 		const endereco = `${API_URL}/photos/${idPhoto}`;
 		return this.httpClient.delete(endereco);
+	}
+
+	/**
+	 * Retorna Observable<boolean> com true para sucesso e false para erro.
+	 * Lança uma exceção em qualquer outro cenário.
+	 */
+	public gosteiDaFotoComId(idPhoto: number): Observable<boolean> | any {
+		const endereco = `${API_URL}/photos/${idPhoto}/like`;
+		
+		return this.httpClient
+			.post(endereco, {}, { observe: 'response' })
+			.pipe(map(resp => true))
+			.pipe(catchError(erro => {
+				// of(false) => cria um Observable<boolean> com valor false.
+				return erro.status == '304' ? of(false) : throwError(erro);
+			}));
 	}
 }

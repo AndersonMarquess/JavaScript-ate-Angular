@@ -76,4 +76,19 @@ export class PhotoDetailsComponent implements OnInit {
 		}
 		return this.elementoModal;
 	}
+
+	gosteiDaFoto(photo: Photo) {
+		this.photoService.gosteiDaFotoComId(photo.id)
+			.subscribe(
+				respGostei => {
+					if (respGostei) {
+						this.atualizarDadosDaFoto(photo);
+					}
+				}
+			);
+	}
+
+	private atualizarDadosDaFoto(photo: Photo) {
+		this.photo$ = this.photoService.buscarPorId(photo.id);
+	}
 }
