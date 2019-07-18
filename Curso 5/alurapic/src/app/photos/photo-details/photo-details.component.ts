@@ -18,13 +18,21 @@ export class PhotoDetailsComponent implements OnInit {
 	elementoModal: HTMLElement;
 	timerCrescente: any = 0;
 
-	constructor(private activatedRoute: ActivatedRoute, private photoService: PhotoService, private router: Router,
-		private elementRef: ElementRef, private renderer: Renderer, private alertService: AlertService, private userService: UserService) { }
+	constructor(
+		private activatedRoute: ActivatedRoute, private router: Router,
+		private elementRef: ElementRef, private renderer: Renderer,
+		private photoService: PhotoService, private alertService: AlertService,
+		private userService: UserService
+	) { }
 
 	ngOnInit(): void {
 		// photoId - definido no app.routing
 		this.idPhotoDetails = this.activatedRoute.snapshot.params.photoId;
 		this.photo$ = this.photoService.buscarPorId(this.idPhotoDetails);
+		this.photo$.subscribe(
+			suce => { },
+			erro => this.router.navigate(['/not-found'])
+		);
 	}
 
 	removerFoto(): void {

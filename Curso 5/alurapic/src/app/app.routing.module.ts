@@ -44,6 +44,7 @@ const rotasDaAplicacao: Routes = [
 		component: PhotoDetailsComponent,
 		canActivate: [AutenticacaoObrigatoriaGuard]
 	},
+	{ path: 'not-found', redirectTo: '**' },
 	/* Caminho coringa para lidar com rotas inexistentes */
 	{ path: '**', component: NotFoundComponent }
 ]
