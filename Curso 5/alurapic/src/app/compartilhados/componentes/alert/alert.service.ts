@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { Alert, TipoDeAlerta } from './alert';
 
@@ -6,24 +7,46 @@ import { Alert, TipoDeAlerta } from './alert';
 export class AlertService {
 
 	alertSubject = new Subject<Alert>();
+	manterAposMudancaDeRota = false;
 
-	success(msg: string): void {
-		this._alert(TipoDeAlerta.SUCCESS, msg);
+	constructor(router: Router) {
+		router.events
+			.subscribe(event =>
+				this.verificarAleracaoNaRota(event)
+			);
 	}
 
-	warning(msg: string): void {
-		this._alert(TipoDeAlerta.WARNING, msg);
+	verificarAleracaoNaRota(event: any): void {
+		// se for o inicio de uma navegação
+		if (event instanceof NavigationStart) {
+			console.log("Iniciou navegação");
+
+			if (this.manterAposMudancaDeRota) {
+				this.manterAposMudancaDeRota = false;
+			} else {
+				this.removerAlert();
+			}
+		}
 	}
 
-	danger(msg: string): void {
-		this._alert(TipoDeAlerta.DANGER, msg);
+	success(msg: string, manterAposMudancaDeRota: boolean = false): void {
+		this._alert(TipoDeAlerta.SUCCESS, msg, manterAposMudancaDeRota);
 	}
 
-	info(msg: string): void {
-		this._alert(TipoDeAlerta.INFO, msg);
+	warning(msg: string, manterAposMudancaDeRota: boolean = false): void {
+		this._alert(TipoDeAlerta.WARNING, msg, manterAposMudancaDeRota);
 	}
 
-	private _alert(tipoDeAlerta: TipoDeAlerta, mensagem: string): void {
+	danger(msg: string, manterAposMudancaDeRota: boolean = false): void {
+		this._alert(TipoDeAlerta.DANGER, msg, manterAposMudancaDeRota);
+	}
+
+	info(msg: string, manterAposMudancaDeRota: boolean = false): void {
+		this._alert(TipoDeAlerta.INFO, msg, manterAposMudancaDeRota);
+	}
+
+	private _alert(tipoDeAlerta: TipoDeAlerta, mensagem: string, manterAposMudancaDeRota: boolean): void {
+		this.manterAposMudancaDeRota = manterAposMudancaDeRota;
 		this.alertSubject.next(new Alert(tipoDeAlerta, mensagem));
 	}
 
