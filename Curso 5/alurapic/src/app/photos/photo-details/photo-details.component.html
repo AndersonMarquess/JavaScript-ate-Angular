@@ -8,10 +8,12 @@
 			<header>
 				<h5 class="text-left break-word mb-0 mt-3">{{ photo.description | uppercase }}</h5>
 				<div class="text-left mt-1">
-					<i class="fa fa-comment-o fa-1x mr-2 ml-2"></i>{{ photo.comments }}
+					<i class="fa fa-heart-o fa-1x mr-1" apenasLogado> {{ photo.likes }}</i>
+					<i class="fa fa-comment-o fa-1x mr-2 ml-2"> {{ photo.comments }}</i>
+
 					<!-- Ativa o modal -->
-					<i (click)="mostrarEOcultarModal()" class="fa fa-trash-o fa-1x ml-2 pull-right" 
-						apenasCriadorPhoto [photoCriada]="photo"></i>
+					<i class="fa fa-trash-o fa-1x ml-2 pull-right" (click)="mostrarEOcultarModal()"
+						[photoCriada]="photo" apenasCriadorPhoto apenasLogado></i>
 				</div>
 				<hr class="mt-0">
 			</header>

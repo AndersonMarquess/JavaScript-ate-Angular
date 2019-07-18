@@ -7,6 +7,7 @@ import { PhotoModule } from '../photo/photo.module';
 import { ApenasCriadorPhotoDirective } from './apenas-criador-photo/apenas-criador-photo.directive';
 import { PhotoCommentsComponent } from './photo-comments/photo-comments.component';
 import { PhotoDetailsComponent } from './photo-details.component';
+import { ApenasLogadoModule } from 'src/app/compartilhados/diretivas/apenas-logado/apenas-logado.module';
 
 @NgModule({
 	declarations: [
@@ -19,7 +20,8 @@ import { PhotoDetailsComponent } from './photo-details.component';
 		PhotoModule,
 		RouterModule,
 		ReactiveFormsModule,
-		MsgValidacaoModule
+		MsgValidacaoModule,
+		ApenasLogadoModule
 	],
 	exports: [
 		PhotoDetailsComponent,
