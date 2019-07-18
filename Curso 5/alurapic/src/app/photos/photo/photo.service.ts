@@ -4,8 +4,10 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Photo } from './Photo';
 import { PhotoComment } from './photo-comment';
+import { environment } from "../../../environments/environment";
 
-const API_URL = `http://localhost:3000`;
+const API_URL = environment.ApiUrl;
+
 @Injectable({
 	// root - quando o angular injetar o PhotoService, 
 	// a mesma instância será disponibilizada para qualquer componente. (singleton)
@@ -65,7 +67,7 @@ export class PhotoService {
 	 */
 	public gosteiDaFotoComId(idPhoto: number): Observable<boolean> | any {
 		const endereco = `${API_URL}/photos/${idPhoto}/like`;
-		
+
 		return this.httpClient
 			.post(endereco, {}, { observe: 'response' })
 			.pipe(map(resp => true))

@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from "../../../environments/environment";
 import { NovoUsuario } from './novo-usuario';
 
-const API_URL = "http://localhost:3000";
+const API_URL = environment.ApiUrl;;
 
 // Injetado no HomeModule.
 @Injectable()
