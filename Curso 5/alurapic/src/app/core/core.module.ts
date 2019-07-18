@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { RequestInterceptor } from './auth/request.interceptor';
 import { FooterComponent } from './footer/footer.component';
+import { AlertModule } from '../compartilhados/componentes/alert/alert.module';
 
 @NgModule({
 	declarations: [
@@ -14,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 	],
 	imports: [
 		CommonModule,
+		AlertModule,
 		// Necessário para usar o routerLink.
 		RouterModule
 	],

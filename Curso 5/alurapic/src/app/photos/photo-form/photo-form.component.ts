@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/compartilhados/componentes/alert/alert.service';
+import { UserService } from 'src/app/core/user/user.service';
 import { PhotoService } from '../photo/photo.service';
 
 @Component({
@@ -15,7 +17,8 @@ export class PhotoFormComponent implements OnInit {
 	fotoFile: File;
 	previewFotoBase64: string;
 
-	constructor(private formBuilder: FormBuilder, private photoService: PhotoService, private router: Router) { }
+	constructor(private formBuilder: FormBuilder, private photoService: PhotoService, private router: Router,
+		private alertService: AlertService, private userService: UserService) { }
 
 	ngOnInit() {
 		this.formNovaFoto = this.formBuilder.group({
@@ -32,7 +35,10 @@ export class PhotoFormComponent implements OnInit {
 		this.photoService
 			.publicarFoto(description, allowComments, this.fotoFile)
 			.subscribe(
-				sucesso => this.router.navigate([''])
+				sucesso => {
+					this.alertService.success("Envio concluído com sucesso", true);
+					this.router.navigate(['/user', this.userService.getNomeUsuario()]);
+				}
 			);
 
 	}
