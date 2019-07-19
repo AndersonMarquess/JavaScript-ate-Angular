@@ -42,12 +42,18 @@
 					<input type="checkbox" formControlName="allowComments">
 				</label>
 			</div>
+			<!-- if -->
+			<div *ngIf="!progressoPercentual; else mostrarProgresso">
+				<button type="submit" class="btn btn-primary btn-block" [disabled]="formNovaFoto.invalid">
+					Enviar
+				</button>
 
-			<button type="submit" class="btn btn-primary btn-block" [disabled]="formNovaFoto.invalid">
-				Enviar
-			</button>
-
-			<a class="btn btn-secondary btn-block">Cancelar</a>
+				<a [routerLink]="['']" class="btn btn-secondary btn-block">Cancelar</a>
+			</div>
+			<!-- else  -->
+			<ng-template #mostrarProgresso>
+				<div class="text-center display-4">Enviando {{ progressoPercentual }}%</div>
+			</ng-template>
 		</div>
 	</form>
 </div>

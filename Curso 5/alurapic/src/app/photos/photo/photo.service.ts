@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from "../../../environments/environment";
 import { Photo } from './Photo';
 import { PhotoComment } from './photo-comment';
-import { environment } from "../../../environments/environment";
 
 const API_URL = environment.ApiUrl;
 
@@ -20,7 +20,7 @@ export class PhotoService {
 
 	public buscarFotosDoUsuario(nomeUsuario: string): Observable<Photo[]> {
 		const observable = this.httpClient.get<Photo[]>(`${API_URL}/${nomeUsuario}/photos`);
-		// o Observable só fará o get, se alguem estiver subscrito.
+		// o Observable só fará o get, se alguém estiver subscrito.
 		return observable;
 	}
 
@@ -37,7 +37,7 @@ export class PhotoService {
 		formData.append("allowComments", allowComments ? "true" : "false");
 		formData.append("imageFile", fotoArquivo);
 
-		return this.httpClient.post(endereco, formData);
+		return this.httpClient.post(endereco, formData, { observe: 'events', reportProgress: true });
 	}
 
 	public buscarPorId(idPhoto: number): Observable<Photo> {
