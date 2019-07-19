@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { DetectorDePlataformaService } from 'src/app/core/detector-de-plataforma/detector-de-plataforma.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
 	templateUrl: './login.component.html',
@@ -13,11 +14,12 @@ export class LoginComponent implements OnInit {
 	formularioDeLogin: FormGroup;
 	@ViewChild('varDeTemplateDoInputNome', null) inputNomeUsuario: ElementRef<HTMLInputElement>;
 
-	constructor(private formBuilder: FormBuilder, private authService: AuthService,
-		private router: Router, private detectorPlataforma: DetectorDePlataformaService) { }
+	constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router,
+		private detectorPlataforma: DetectorDePlataformaService, private titleService: Title) { }
 
 	ngOnInit() {
-
+		this.titleService.setTitle("Login");
+		
 		//validação de formulário
 		this.formularioDeLogin = this.formBuilder.group({
 			// A chave corresponde ao input presente no formulário do template.

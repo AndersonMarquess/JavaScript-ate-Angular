@@ -19,7 +19,10 @@ const rotasDaAplicacao: Routes = [
 		path: 'home',
 		// Para usar o lazy loading, não podemos importar o module direto no app.module.
 		// Especificamos o caminho # Nome do module que será importada.
-		loadChildren: './home/home.module#HomeModule'
+		loadChildren: './home/home.module#HomeModule',
+		data: {
+			titulo: 'Alurapic'
+		}
 	},
 	/* 
 	 * Rota de acesso e component que será carregado.
@@ -32,16 +35,26 @@ const rotasDaAplicacao: Routes = [
 		// faz com que o componente seja carregado já com o conteúdo retornado por 'PhotoListResolver'
 		resolve: {
 			fotosOrigemResolver: PhotoListResolver
+		},
+		// Conteúdo extra para ser acessado no componente de foto.
+		data: {
+			titulo: 'Linha do tempo'
 		}
 	},
 	{
 		path: 'p/add',
 		component: PhotoFormComponent,
-		canActivate: [AutenticacaoObrigatoriaGuard]
+		canActivate: [AutenticacaoObrigatoriaGuard],
+		data: {
+			titulo: 'Enviar foto'
+		}
 	},
 	{
 		path: 'p/:photoId',
-		component: PhotoDetailsComponent
+		component: PhotoDetailsComponent,
+		data: {
+			titulo: 'Detalhe da foto'
+		}
 	},
 	{ path: 'not-found', redirectTo: '**' },
 	/* Caminho coringa para lidar com rotas inexistentes */

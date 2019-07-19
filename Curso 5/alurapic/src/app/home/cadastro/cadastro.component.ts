@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-
 import { lowerCaseValidator } from 'src/app/compartilhados/validadores/lower-case.validator';
+import { DetectorDePlataformaService } from 'src/app/core/detector-de-plataforma/detector-de-plataforma.service';
 import { CadastroService } from './cadastro.service';
 import { NomeUsuarioValidatorService } from './nome-usuario.validator.service';
 import { NovoUsuario } from './novo-usuario';
-import { DetectorDePlataformaService } from 'src/app/core/detector-de-plataforma/detector-de-plataforma.service';
+
 
 @Component({
 	selector: 'ap-cadastro',
@@ -22,13 +23,15 @@ export class CadastroComponent implements OnInit {
 	// inputEmail - é a variável de template.
 	@ViewChild("inputEmail", null) inputEmail: ElementRef<HTMLInputElement>;
 
-	constructor(private formBuilder: FormBuilder,
-		private nomeUsuarioValidator: NomeUsuarioValidatorService,
-		private cadastroService: CadastroService,
-		private router: Router,
-		private detectorPlataforma: DetectorDePlataformaService) { }
+	constructor(
+		private formBuilder: FormBuilder, private nomeUsuarioValidator: NomeUsuarioValidatorService,
+		private cadastroService: CadastroService, private detectorPlataforma: DetectorDePlataformaService,
+		private router: Router, private titleService: Title
+	) { }
 
 	ngOnInit(): void {
+		this.titleService.setTitle("Criar conta");
+
 		this.cadastroForm = this.formBuilder.group({
 			// valor inicial e array de validadores.
 			email: [
