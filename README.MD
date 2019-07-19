@@ -15,3 +15,5 @@ Objetivando aprender angular, resolvi documentar este processo salvando os códi
 	5.1 Angular parte 2: Autenticação, forms e lazy loading - Alura.
 	
 	5.2 Angular parte 3: Upload, build e novos componentes - Alura.
+
+	5.3 Angular parte 4: Lapidando o projeto - Alura.
