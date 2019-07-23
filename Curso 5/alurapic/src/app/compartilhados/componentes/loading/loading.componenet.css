@@ -1,0 +1,19 @@
+.loading {
+    margin: 0;
+    background: linear-gradient(90deg, #ffffff, #006deb);
+	animation: progress 4s;
+    height: 0.2em;
+}
+
+@keyframes progress {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+.stopped {
+    display: none;
+}

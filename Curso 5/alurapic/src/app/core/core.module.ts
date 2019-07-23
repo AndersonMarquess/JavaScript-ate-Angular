@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-import { HeaderComponent } from './header/header.component';
+import { AlertModule } from '../compartilhados/componentes/alert/alert.module';
+import { LoadingModule } from '../compartilhados/componentes/loading/loading.module';
 import { RequestInterceptor } from './auth/request.interceptor';
 import { FooterComponent } from './footer/footer.component';
-import { AlertModule } from '../compartilhados/componentes/alert/alert.module';
+import { HeaderComponent } from './header/header.component';
+
 
 @NgModule({
 	declarations: [
@@ -16,10 +17,11 @@ import { AlertModule } from '../compartilhados/componentes/alert/alert.module';
 	imports: [
 		CommonModule,
 		AlertModule,
+		LoadingModule,
 		// Necessário para usar o routerLink.
 		RouterModule
 	],
-	providers:[
+	providers: [
 		{
 			// Habilita o interceptor personalizado.
 			provide: HTTP_INTERCEPTORS,
