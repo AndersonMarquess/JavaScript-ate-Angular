@@ -1,6 +1,18 @@
 <header class="fixed-top">
 	<nav class="navbar navbar-light bg-white">
-		<a class="navbar-brand">ALURAPIC</a>
+		<a class="navbar-brand">
+			<i tabindex="0" (keyup.space)="menu.alternarVisibilidade()" (click)="menu.alternarVisibilidade()"
+				class="fa fa-bars mr-2 cursor-pointer"></i>
+			ALURAPIC
+		</a>
+
+		<ap-menu #menu>
+			<ul class="list-unstyled">
+				<li>
+					<a [routerLink]="['p','add']" apenasLogado>Enviar foto</a>
+				</li>
+			</ul>
+		</ap-menu>
 
 		<!-- 
 			Se não tiver um usuário, será chamado o ng-template com a variável de templade 'login'.

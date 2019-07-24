@@ -1,0 +1,26 @@
+.menu-bar {
+    position:  fixed;
+    height: 100%;
+	width: 90%;
+	max-width: 300px;
+    margin: 0;
+    padding: 1em;
+    background: #f0f0f0;
+	z-index: 2;
+	top: 0;
+    left: -90%;
+    transition: left 0.3s ease-out;
+}
+
+.ativar-menu .menu-bar {
+	left: 0;
+}
+
+.ativar-menu .sobrepor {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0, 0, 0, .5)
+}

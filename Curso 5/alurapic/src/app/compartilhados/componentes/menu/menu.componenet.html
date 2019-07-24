@@ -1,0 +1,12 @@
+<!-- 
+	Aplica a classe 'ativar-menu' apenas se o valor de estaVisivel for true.
+ -->
+<div [ngClass]="{ 'ativar-menu': estaVisivel }">
+	<div class="menu-bar">
+		<!-- (keyup.space) => escuta o evento de keyup da barra de espaço -->
+		<i class="fa fa-2x fa-window-close pull-right cursor-pointer" (click)="alternarVisibilidade()" tabindex="0"
+			(keyup.space)="alternarVisibilidade()"></i>
+		<ng-content></ng-content>
+	</div>
+	<div class="sobrepor cursor-pointer" (click)="alternarVisibilidade()"></div>
+</div>

@@ -6,11 +6,28 @@ import { UserService } from 'src/app/core/user/user.service';
 })
 export class ApenasLogadoDirective implements OnInit {
 
+	displayAtual: string;
+
 	constructor(private elemento: ElementRef<any>, private renderer: Renderer, private userService: UserService) { }
 
 	ngOnInit(): void {
-		if (!this.userService.estaLogado()) {
-			this.renderer.setElementStyle(this.elemento.nativeElement, "display", "none");
-		}
+		this.salvarValorDisplayAtual();
+
+		this.userService.getUser().subscribe(usuario => {
+			if (usuario) {
+				this.alterarValorDisplayDoElemento(this.displayAtual);
+			} else {
+				this.salvarValorDisplayAtual();
+				this.alterarValorDisplayDoElemento("none");
+			}
+		});
+	}
+
+	private alterarValorDisplayDoElemento(valorDisplay: string): void {
+		this.renderer.setElementStyle(this.elemento.nativeElement, "display", valorDisplay);
+	}
+
+	private salvarValorDisplayAtual(): void {
+		this.displayAtual = getComputedStyle(this.elemento.nativeElement).display;
 	}
 }
