@@ -1,6 +1,8 @@
 import { LocationStrategy } from '@angular/common';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/user/user.service';
+import { environment } from 'src/environments/environment';
 import * as StackTrace from 'stacktrace-js';
 import { ServerLogService } from './server-log.service';
 
@@ -14,8 +16,12 @@ export class GlobalErrorHandler implements ErrorHandler {
 		const location = this.injector.get(LocationStrategy);
 		const userService = this.injector.get(UserService);
 		const servLogService = this.injector.get(ServerLogService);
+		const router = this.injector.get(Router);
+
 		const url = this.getPathLocation(location);
 		const msgErro = this.getMsgErro(error);
+
+		this.redirecionarParaPaginaDeErro(router);
 
 		// Transforma cada item do erro em array
 		StackTrace.fromError(error)
@@ -25,6 +31,12 @@ export class GlobalErrorHandler implements ErrorHandler {
 				console.log(stackAsString);
 				this.enviarLogParaOServidor(servLogService, msgErro, url, userService.getNomeUsuario(), stackAsString);
 			});
+	}
+
+	private redirecionarParaPaginaDeErro(router: Router) {
+		if (environment.production) {
+			router.navigate(['/erro']);
+		}
 	}
 
 	private enviarLogParaOServidor(serverLogService: ServerLogService, message: string, url: string, userName: string, stack: string): void {

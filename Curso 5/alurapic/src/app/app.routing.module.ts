@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AutenticacaoObrigatoriaGuard } from './core/auth/autenticacao-obrigatoria.guard';
+import { GlobalErroComponent } from './erros/global-erro/global-erro.componenet';
 import { NotFoundComponent } from './erros/not-found/not-found.component';
 import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
 import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
@@ -54,6 +55,13 @@ const rotasDaAplicacao: Routes = [
 		component: PhotoDetailsComponent,
 		data: {
 			titulo: 'Detalhe da foto'
+		}
+	},
+	{
+		path: 'erro',
+		component: GlobalErroComponent,
+		data: {
+			titulo: 'Erro'
 		}
 	},
 	{ path: 'not-found', redirectTo: '**' },
