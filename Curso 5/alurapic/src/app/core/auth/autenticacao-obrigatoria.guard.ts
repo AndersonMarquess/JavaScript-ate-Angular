@@ -16,12 +16,21 @@ export class AutenticacaoObrigatoriaGuard implements CanActivate {
 		if (this.usuarioService.estaLogado()) {
 			return true;
 		} else {
-			this.redirecionarParaLogin();
+			this.redirecionarParaLogin(state);
 			return false;
 		}
 	}
 
-	private redirecionarParaLogin(): void {
-		this.router.navigate(['']);
+	/**
+	 * Vai para tela de login, após login, redireciona o usuário para rota que ele estava tentando acessar anteriormente.
+	 * @param state 
+	 */
+	private redirecionarParaLogin(state: RouterStateSnapshot): void {
+		this.router.navigate(
+			[''],
+			{
+				queryParams: { redirecionarPara: state.url }
+			}
+		);
 	}
 }

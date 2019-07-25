@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { DetectorDePlataformaService } from 'src/app/core/detector-de-plataforma/detector-de-plataforma.service';
-import { Title } from '@angular/platform-browser';
 
 @Component({
 	templateUrl: './login.component.html',
@@ -11,15 +11,19 @@ import { Title } from '@angular/platform-browser';
 })
 export class LoginComponent implements OnInit {
 
+	redirecionarPara: string;
 	formularioDeLogin: FormGroup;
 	@ViewChild('varDeTemplateDoInputNome', null) inputNomeUsuario: ElementRef<HTMLInputElement>;
 
-	constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router,
+	constructor(
+		private router: Router, private activatedRoute: ActivatedRoute,
+		private formBuilder: FormBuilder, private authService: AuthService,
 		private detectorPlataforma: DetectorDePlataformaService, private titleService: Title) { }
 
 	ngOnInit() {
 		this.titleService.setTitle("Login");
-		
+		this.extrairRotaParaRedirecionar();
+
 		//validação de formulário
 		this.formularioDeLogin = this.formBuilder.group({
 			// A chave corresponde ao input presente no formulário do template.
@@ -33,6 +37,10 @@ export class LoginComponent implements OnInit {
 		}
 	}
 
+	private extrairRotaParaRedirecionar() {
+		this.redirecionarPara = this.activatedRoute.snapshot.queryParams.redirecionarPara;
+	}
+
 	// chamado no evento de submit do form.
 	login() {
 		const nome = this.formularioDeLogin.get('nomeUsuario').value;
@@ -44,7 +52,13 @@ export class LoginComponent implements OnInit {
 			 * ['user', nome] é o mesmo que -> user/nome.
 			 * também é possível usar, router.navigateByUrl('user/'+nome);
 			 */
-			sucesso => this.router.navigate(['user', nome]),
+			sucesso => {
+				if (this.redirecionarPara) {
+					this.router.navigateByUrl(this.redirecionarPara);
+				} else {
+					this.router.navigate(['user', nome]);
+				}
+			},
 			erro => {
 				if (this.detectorPlataforma.estaRodandoNoBrowser()) {
 					this.inputNomeUsuario.nativeElement.focus();
