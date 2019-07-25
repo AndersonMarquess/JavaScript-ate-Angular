@@ -2,7 +2,7 @@
 
 <!-- É obrigatório o import do FormsModule ao usar <forms> no angular. -->
 <form #formulario="ngForm" class="form mt-4 container" [formGroup]="cadastroForm" (submit)="cadastrar()">
-	
+
 	<!-- E-mail -->
 	<div class="form-group">
 		<input #inputEmail formControlName="email" placeholder="E-mail" class="form-control" autofocus>
@@ -46,7 +46,7 @@
 		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.nomeIndisponivel"
 			detalhes="Nome de usuário indisponível.">
 		</ap-msg-validacao>
-		<small *ngIf="cadastroForm.get('userName').valid && formulario.submitted" class="text-success">Nome de usuário
+		<small *ngIf="cadastroForm.get('userName').valid" class="text-success">Nome de usuário
 			disponível.</small>
 	</div>
 
@@ -60,6 +60,11 @@
 		</ap-msg-validacao>
 		<ap-msg-validacao *ngIf="cadastroForm.get('password').errors?.maxlength && formulario.submitted"
 			detalhes="Máximo de 14 caracteres.">
+		</ap-msg-validacao>
+
+		<!-- Verifica se o campo do nome e da senha são diferentes. -->
+		<ap-msg-validacao *ngIf="cadastroForm.errors?.nomeUsuarioSenhaValidator"
+			detalhes="O nome deve ser diferente da senha.">
 		</ap-msg-validacao>
 	</div>
 

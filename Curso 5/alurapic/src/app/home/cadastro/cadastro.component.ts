@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { lowerCaseValidator } from 'src/app/compartilhados/validadores/lower-case.validator';
 import { DetectorDePlataformaService } from 'src/app/core/detector-de-plataforma/detector-de-plataforma.service';
 import { CadastroService } from './cadastro.service';
+import { nomeUsuarioSenhaValidator } from './nome-usuario-senha.validator.service';
 import { NomeUsuarioValidatorService } from './nome-usuario.validator.service';
 import { NovoUsuario } from './novo-usuario';
 
@@ -71,7 +72,11 @@ export class CadastroComponent implements OnInit {
 					Validators.maxLength(14)
 				]
 			],
-		});
+		},
+			{
+				validators: nomeUsuarioSenhaValidator
+			}
+		);
 
 		if (this.detectorPlataforma.estaRodandoNoBrowser()) {
 			this.inputEmail.nativeElement.focus();
