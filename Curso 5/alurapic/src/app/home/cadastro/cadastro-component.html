@@ -1,56 +1,70 @@
 <h4 class="text-center">Registre-se para embarcar em um novo mundo!</h4>
 
-<!-- É obrigatório o import de algum FormsModule sempre que se usa <forms> no angular. -->
-<form class="form mt-4 container" [formGroup]="cadastroForm" (submit)="cadastrar()">
+<!-- É obrigatório o import do FormsModule ao usar <forms> no angular. -->
+<form #formulario="ngForm" class="form mt-4 container" [formGroup]="cadastroForm" (submit)="cadastrar()">
+	
+	<!-- E-mail -->
 	<div class="form-group">
 		<input #inputEmail formControlName="email" placeholder="E-mail" class="form-control" autofocus>
-		<ap-msg-validacao *ngIf="cadastroForm.get('email').errors?.required" detalhes="Este campo é obrigatório.">
+		<!-- Validação feita após o input perder o foco -->
+		<ap-msg-validacao
+			*ngIf="cadastroForm.get('email').errors?.required && (formulario.submitted || cadastroForm.get('email').touched)"
+			detalhes="Este campo é obrigatório.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('email').errors?.email" detalhes="O e-mail não é válido.">
+		<ap-msg-validacao
+			*ngIf="cadastroForm.get('email').errors?.email && (formulario.submitted || cadastroForm.get('email').touched)"
+			detalhes="O e-mail não é válido.">
 		</ap-msg-validacao>
 	</div>
 
 	<div class="form-group">
 		<input formControlName="fullName" placeholder="Nome completo" class="form-control">
-		<ap-msg-validacao *ngIf="cadastroForm.get('fullName').errors?.required"
+		<ap-msg-validacao *ngIf="cadastroForm.get('fullName').errors?.required && formulario.submitted"
 			detalhes="Este campo é obrigatório."></ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('fullName').errors?.minlength" detalhes="Mínimo de 5 caracteres.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('fullName').errors?.minlength && formulario.submitted"
+			detalhes="Mínimo de 5 caracteres.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('fullName').errors?.maxlength"
+		<ap-msg-validacao *ngIf="cadastroForm.get('fullName').errors?.maxlength && formulario.submitted"
 			detalhes="Máximo de 50 caracteres."></ap-msg-validacao>
 	</div>
 
 	<div class="form-group">
 		<input formControlName="userName" placeholder="Nome de usuário" class="form-control">
-		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.required" detalhes="Este campo é obrigatório.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.required && formulario.submitted"
+			detalhes="Este campo é obrigatório.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.lowercase"
+		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.lowercase && formulario.submitted"
 			detalhes="O nome do usuário deve estar em minúsculo."></ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.minlength" detalhes="Mínimo de 5 caracteres.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.minlength && formulario.submitted"
+			detalhes="Mínimo de 5 caracteres.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.maxlength" detalhes="Máximo de 20 caracteres.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.maxlength && formulario.submitted"
+			detalhes="Máximo de 20 caracteres.">
 		</ap-msg-validacao>
 
 		<!-- nomeIndisponivel - especificado no nome-usuario-validator-service -->
 		<ap-msg-validacao *ngIf="cadastroForm.get('userName').errors?.nomeIndisponivel"
 			detalhes="Nome de usuário indisponível.">
 		</ap-msg-validacao>
-		<small *ngIf="cadastroForm.get('userName').valid" class="text-success">Nome de usuário disponível.</small>
+		<small *ngIf="cadastroForm.get('userName').valid && formulario.submitted" class="text-success">Nome de usuário
+			disponível.</small>
 	</div>
 
 	<div class="form-group">
 		<input formControlName="password" type="password" placeholder="Senha" class="form-control">
-		<ap-msg-validacao *ngIf="cadastroForm.get('password').errors?.required" detalhes="Este campo é obrigatório.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('password').errors?.required && formulario.submitted"
+			detalhes="Este campo é obrigatório.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('password').errors?.minlength" detalhes="Mínimo de 8 caracteres.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('password').errors?.minlength && formulario.submitted"
+			detalhes="Mínimo de 8 caracteres.">
 		</ap-msg-validacao>
-		<ap-msg-validacao *ngIf="cadastroForm.get('password').errors?.maxlength" detalhes="Máximo de 14 caracteres.">
+		<ap-msg-validacao *ngIf="cadastroForm.get('password').errors?.maxlength && formulario.submitted"
+			detalhes="Máximo de 14 caracteres.">
 		</ap-msg-validacao>
 	</div>
 
 	<!-- cadastroForm.pending - verifica se existe alguma validação assíncrono rodando. -->
-	<button [disabled]="cadastroForm.invalid || cadastroForm.pending"
-		class="btn btn-primary btn-block">Registrar</button>
+	<button class="btn btn-primary btn-block">Registrar</button>
 
 	<p class="text-center pt-4">Já possui uma conta? <a [routerLink]="['/']">Entrar</a></p>
 </form>

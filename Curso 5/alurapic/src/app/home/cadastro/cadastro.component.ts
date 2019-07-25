@@ -79,9 +79,12 @@ export class CadastroComponent implements OnInit {
 	}
 
 	cadastrar() {
-		const novoUsuario = this.cadastroForm.getRawValue() as NovoUsuario;
+		const isFormValidoComNadaPendente = this.cadastroForm.valid && !this.cadastroForm.pending;
+		if (isFormValidoComNadaPendente) {
+			const novoUsuario = this.cadastroForm.getRawValue() as NovoUsuario;
 
-		this.cadastroService.cadastrar(novoUsuario)
-			.subscribe(sucesso => this.router.navigate(['/']));
+			this.cadastroService.cadastrar(novoUsuario)
+				.subscribe(sucesso => this.router.navigate(['/']));
+		}
 	}
 }
