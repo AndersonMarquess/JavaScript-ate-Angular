@@ -50,7 +50,8 @@ export class PhotoDetailsComponent implements OnInit {
 				.subscribe(
 					sucesso => {
 						this.alertService.success("Foto removida com sucesso", true);
-						this.router.navigate(['/user', this.userService.getNomeUsuario()]);
+						// replaceUrl usado para remover a rota, agora inexistente, do histórico.
+						this.router.navigate(['/user', this.userService.getNomeUsuario()], { replaceUrl: true });
 					},
 					erro => {
 						console.log(erro.message);
